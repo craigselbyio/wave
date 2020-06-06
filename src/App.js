@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './wave-logo.png';
 import './App.css';
+import Featured from './Components/Featured/Featured';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
+      <Featured />
     </div>
   );
 }

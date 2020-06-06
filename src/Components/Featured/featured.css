@@ -1,14 +1,32 @@
 * {
     color: #FFF;
 }
-
+.featured-wrap {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+}
 .number-one-track {
-    width: 20vw;
+    width: 30vw;
+    background-image: url(../../img/new-releases.png), url(../../img/fire-bg.png);
+    background-size: 70%, contain;
+    background-position: top, center;
+    background-repeat: no-repeat;
+    margin: 0 5rem 0 1rem;
 
 }
 .number-one-track-img {
-    width: 100%;
+    padding: 25% 0 0;
+    width: 60%;
+}
+.number-one-track-title {
+    margin: 2rem 0 .25rem 0;
+}
+.number-one-track-artist {
+    margin: 0;
+    font-weight: normal;
 }
 .featured-tracks {
+    text-align: left;
 
 }

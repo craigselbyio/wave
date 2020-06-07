@@ -10,10 +10,22 @@ function App() {
 
 const [newReleases, setNewReleases ] = useState([]);
 
+const [newPlaylist, setNewPlaylist ] = useState([]);
+
 async function searchGetNew() {
     let nr = await Spotify.getNew();
-    setNewReleases(nr);
-    console.log(newReleases)
+    console.log(nr)
+    if(nr.error) {
+      console.log(nr.error)
+    } else {
+      setNewReleases(nr);
+      console.log(newReleases)
+    }
+  }
+  //searchGetNew()
+  
+  const handlePlaylistAdd = (track) => {
+    setNewPlaylist([...newPlaylist, track]);
   }
 
   return (
@@ -23,9 +35,10 @@ async function searchGetNew() {
       </header>
       <button onClick={searchGetNew}>Search</button>
 
-      <NewPlaylist Playlist={[{'name': 'Motorsport', 'img': motorsport, 'artist': 'Migos, Nicki Minaj, Cardi B'}]} />
+      <NewPlaylist Playlist={newPlaylist} />
 
-      <Featured newReleases={newReleases} />
+      <input className="search-input" placeholder="Search for greatness_" />
+      <Featured addToPlaylist={handlePlaylistAdd} newReleases={newReleases} />
     </div>
   );
 }

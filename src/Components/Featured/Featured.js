@@ -3,7 +3,7 @@ import "./featured.css";
 import motorsport from "../../img/motorsport-migos-nickiminaj-cardib.png";
 import Track from "../Track/Track";
 
-const Featured = ({ newReleases }) => {
+const Featured = ({ newReleases, addToPlaylist }) => {
   return (
     <div className="featured-wrap">
       <div className="number-one-track">
@@ -20,7 +20,7 @@ const Featured = ({ newReleases }) => {
       </div>
       <div className="featured-tracks">
         {newReleases.map((track, index) =>
-          index !== 0 ? <Track trackType={"small"} data={track} /> : ""
+          index !== 0 ? <Track addToPlaylist={addToPlaylist} trackType={"small"} track={track} /> : ""
         )}
       </div>
     </div>

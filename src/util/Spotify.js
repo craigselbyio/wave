@@ -33,15 +33,20 @@ export const Spotify = {
         },
       }
     );
-    let data = await response.json();
 
-    //console.log(data);
-    return data.albums.items.map((album) => ({
-      artist: album.artists[0].name,
-      name: album.name,
-      img: album.images[0].url,
-      id: album.id,
-    }));
-    //return newReleases;
+   
+    let data = await response.json();
+    console.log(data);
+    if (data.error) {
+      return data;
+    } else {
+      return data.albums.items.map((album) => ({
+        artist: album.artists[0].name,
+        name: album.name,
+        img: album.images[0].url,
+        id: album.id,
+      }));
+      //return newReleases;
+    }
   },
 };

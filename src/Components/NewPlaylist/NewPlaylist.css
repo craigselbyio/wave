@@ -1,25 +1,51 @@
 .new-playlist {
-    display: flex;
-    max-width: 1000px;
-    margin: 0 auto;
-    background-color: #161616;
-    padding: 1rem 2rem;
-    border-radius: 20px;
-    position: -webkit-sticky; /* Safari */
-    position: sticky;
-    top: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #161616;
+  padding: 2rem 2rem 1rem;
+  border-radius: 20px;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 1rem;
+}
+.playlist-name-input {
+  width: 700px;
+  margin: 0 0 2rem 0;
+  border: 0;
+  border-bottom: 5px solid #fff;
+  background-color: transparent;
+  font-size: 1rem;
+  font-weight: bold;
+  outline: none;
+  text-transform: uppercase;
+  text-align: center;
+}
+.playlist-items {
+  display: flex;
+  flex-wrap: wrap;
 }
 .playlist-item {
-    text-align: left;
-    width: 100px;
+  text-align: left;
+  width: 100px;
+  margin: 0 1rem 1rem 0;
 }
-.playlist-item img { 
-    width: 100%;
+.playlist-item img {
+  width: 100%;
 }
-.playlist-item-name { 
-    margin: .25rem 0 ;
+.playlist-item-name {
+  margin: 0.25rem 0;
 }
 .playlist-item-artist {
-    margin: 0;
-    font-weight: normal;
+  margin: 0;
+  font-weight: normal;
+}
+#save-playlist {
+  position: absolute;
+  right: -0.5rem;
+  bottom: -0.5rem;
+  background-color: #21dc52;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
 }

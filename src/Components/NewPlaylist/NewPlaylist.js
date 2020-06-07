@@ -4,13 +4,20 @@ import "./NewPlaylist.css";
 const NewPlaylist = ({ Playlist }) => {
   return (
     <div className="new-playlist">
-      {Playlist.map((i) => (
-        <div className="playlist-item">
-          <img src={i.img} alt="" />
-          <h5 className="playlist-item-name">{i.name}</h5>
-          <h6 className="playlist-item-artist">{i.artist}</h6>
-        </div>
-      ))}
+      <input
+        className="playlist-name-input"
+        placeholder="Name me, so i know its real_"
+      />
+      <button id="save-playlist">SAVE</button>
+      <div className="playlist-items">
+        {Playlist.map((track) => (
+          <div className="playlist-item">
+            <img src={track.img} alt="" />
+            <h5 className="playlist-item-name">{track.name}</h5>
+            <h6 className="playlist-item-artist">{track.artist}</h6>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

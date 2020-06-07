@@ -1,11 +1,10 @@
 .new-playlist {
-  max-width: 1000px;
+  position: relative;
+  max-width: 1400px;
   margin: 0 auto;
   background-color: #161616;
   padding: 2rem 2rem 1rem;
   border-radius: 20px;
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
   top: 1rem;
 }
 .playlist-name-input {
@@ -58,11 +57,17 @@
 }
 #save-playlist {
   position: absolute;
-  right: -0.5rem;
-  bottom: -0.5rem;
-  background-color: #21dc52;
-  border: none;
+  right: -0;
+  bottom: -0;
+  background-color: transparent;
+  border: 3px solid #21dc52;
+  color: #21dc52;
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-weight: bold;
+  cursor: pointer;
+}
+#save-playlist:hover {
+  background-color: #21dc52;
+  color: #FFF;
 }

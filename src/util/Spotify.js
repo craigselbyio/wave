@@ -22,17 +22,26 @@ export const Spotify = {
     }
   },
 
-  getNew() {
+  async getNew() {
     this.getAccessToken();
 
-    return fetch("https://api.spotify.com/v1/browse/new-releases", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
+    let response = await fetch(
+      "https://api.spotify.com/v1/browse/new-releases",
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    let data = await response.json();
+
+    //console.log(data);
+    return data.albums.items.map((album) => ({
+      artist: album.artists[0].name,
+      name: album.name,
+      img: album.images[0].url,
+      id: album.id,
+    }));
+    //return newReleases;
   },
 };

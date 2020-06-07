@@ -1,0 +1,25 @@
+.new-playlist {
+    display: flex;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #161616;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 1rem;
+}
+.playlist-item {
+    text-align: left;
+    width: 100px;
+}
+.playlist-item img { 
+    width: 100%;
+}
+.playlist-item-name { 
+    margin: .25rem 0 ;
+}
+.playlist-item-artist {
+    margin: 0;
+    font-weight: normal;
+}

@@ -15,10 +15,18 @@
     margin: 0;
     font-weight: normal;
 }
-.add-or-remove-track {
+.add-or-remove-track-btn {
+    width: 36px;
+    height: 36px;
     border: none;
     background-color: transparent;
     background-image: url(../../img/add-default-icon.png);
-    width: 36px;
-    height: 36px;
+    outline: none;
+    cursor: pointer;
+}
+.track-in-playlist {
+    background-image: url(../../img/check-icon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+
 }

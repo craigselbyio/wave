@@ -25,7 +25,14 @@ async function searchGetNew() {
   //searchGetNew()
   
   const handlePlaylistAdd = (track) => {
-    setNewPlaylist([...newPlaylist, track]);
+    let newTrack = {...track,
+    "inPlaylist": true}
+    setNewPlaylist([...newPlaylist, newTrack]);
+
+    let matchingTrack = newReleases.find(newReleaseTrack => newReleaseTrack.id === track.id);
+    matchingTrack.inPlaylist = true;
+
+    console.log(matchingTrack);
   }
 
   return (
@@ -38,7 +45,7 @@ async function searchGetNew() {
       <NewPlaylist Playlist={newPlaylist} />
 
       <input className="search-input" placeholder="Search for greatness_" />
-      <Featured addToPlaylist={handlePlaylistAdd} newReleases={newReleases} />
+      <Featured addToPlaylist={handlePlaylistAdd} newReleases={newReleases} newPlaylist={newPlaylist} />
     </div>
   );
 }

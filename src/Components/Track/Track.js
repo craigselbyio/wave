@@ -2,7 +2,7 @@ import React from "react";
 import "./track.css";
 import motorsport from "../../img/motorsport-migos-nickiminaj-cardib.png";
 
-const Track = ({ trackType, track, addToPlaylist }) => {
+const Track = ({ trackType, track, addToPlaylist, isInPlaylist }) => {
   return (
     <div className="track">
       {trackType === "large" ? <img src={track.img} alt="" /> : ""}
@@ -10,7 +10,7 @@ const Track = ({ trackType, track, addToPlaylist }) => {
         <h2 className="track-title">{track.name}</h2>
         <h4 className="track-artist">{track.artist}</h4>
       </div>
-      <button onClick={() => addToPlaylist(track)} className="add-or-remove-track"></button>
+      <button onClick={() => addToPlaylist(track)} className={isInPlaylist(track.id) ? "add-or-remove-track-btn track-in-playlist" : "add-or-remove-track-btn"} disabled={isInPlaylist(track.id) ? "disabled" : ""}></button>
     </div>
   );
 };

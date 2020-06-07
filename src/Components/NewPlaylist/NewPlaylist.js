@@ -1,7 +1,7 @@
 import React from "react";
 import "./NewPlaylist.css";
 
-const NewPlaylist = ({ Playlist }) => {
+const NewPlaylist = ({ Playlist, removePlaylistItem }) => {
   return (
     <div className="new-playlist">
       <input
@@ -12,6 +12,7 @@ const NewPlaylist = ({ Playlist }) => {
       <div className="playlist-items">
         {Playlist.map((track) => (
           <div className="playlist-item">
+            <div className="playlist-item-remove" onClick={() => removePlaylistItem(track)}></div>
             <img src={track.img} alt="" />
             <h5 className="playlist-item-name">{track.name}</h5>
             <h6 className="playlist-item-artist">{track.artist}</h6>

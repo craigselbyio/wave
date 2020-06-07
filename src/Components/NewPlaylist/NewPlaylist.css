@@ -23,11 +23,28 @@
 .playlist-items {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
 }
 .playlist-item {
+  position: relative;
   text-align: left;
   width: 100px;
   margin: 0 1rem 1rem 0;
+}
+.playlist-item img {
+  left: 0;
+  transition: all .5s;
+}
+.playlist-item-remove {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: url(../../img/delete-cross.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 25px;
+  cursor: pointer;
 }
 .playlist-item img {
   width: 100%;

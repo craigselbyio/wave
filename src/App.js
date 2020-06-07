@@ -35,6 +35,11 @@ async function searchGetNew() {
     console.log(matchingTrack);
   }
 
+  const handlePlaylistRemove = (track) => {
+    let updatedPlaylist = newPlaylist.filter(playlistTrack => playlistTrack.id !== track.id);
+    setNewPlaylist([...updatedPlaylist])
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -42,7 +47,7 @@ async function searchGetNew() {
       </header>
       <button onClick={searchGetNew}>Search</button>
 
-      <NewPlaylist Playlist={newPlaylist} />
+      <NewPlaylist Playlist={newPlaylist} removePlaylistItem={handlePlaylistRemove} />
 
       <input className="search-input" placeholder="Search for greatness_" />
       <Featured addToPlaylist={handlePlaylistAdd} newReleases={newReleases} newPlaylist={newPlaylist} />

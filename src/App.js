@@ -5,12 +5,15 @@ import Featured from "./Components/Featured/Featured";
 import { Spotify } from "./util/Spotify";
 import NewPlaylist from './Components/NewPlaylist/NewPlaylist';
 import motorsport from "./img/motorsport-migos-nickiminaj-cardib.png";
+import Search from "./Components/Search/Search";
 
 function App() {
 
 const [newReleases, setNewReleases ] = useState([]);
 
 const [newPlaylist, setNewPlaylist ] = useState([]);
+
+const [searchResults, setSearchResults] = useState([]);
 
 async function searchGetNew() {
     let nr = await Spotify.getNew();
@@ -22,14 +25,23 @@ async function searchGetNew() {
       console.log(newReleases)
     }
   }
-  //searchGetNew()
+  
+  const trackSearch = async (searchTerm) => {
+    try {
+      let searchResults = await Spotify.trackSearch(searchTerm);
+      console.log(searchResults);
+      setSearchResults([...searchResults]);
+    } catch (error) {
+      console.log(error);
+    }
+  }
   
   const handlePlaylistAdd = (track) => {
     let newTrack = {...track,
     "inPlaylist": true}
     setNewPlaylist([...newPlaylist, newTrack]);
 
-    let matchingTrack = newReleases.find(newReleaseTrack => newReleaseTrack.id === track.id);
+    let matchingTrack = newReleases.find(newReleaseTrack => newReleaseTrack.id === track.id) || searchResults.find(newReleaseTrack => newReleaseTrack.id === track.id) ;
     matchingTrack.inPlaylist = true;
 
     console.log(matchingTrack);
@@ -49,7 +61,8 @@ async function searchGetNew() {
 
       <NewPlaylist Playlist={newPlaylist} removePlaylistItem={handlePlaylistRemove} />
 
-      <input className="search-input" placeholder="Search for greatness_" />
+      <Search addToPlaylist={handlePlaylistAdd} newPlaylist={newPlaylist} trackSearch={trackSearch} searchResults={searchResults} />
+
       <Featured addToPlaylist={handlePlaylistAdd} newReleases={newReleases} newPlaylist={newPlaylist} />
     </div>
   );

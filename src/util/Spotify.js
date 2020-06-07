@@ -11,8 +11,11 @@ export const Spotify = {
         "access_token=([^&]*)"
       );
 
-      if (accessTokenMatch) {
+      const expiresIn = window.location.href.match("expires_in=([^&]*)");
+
+      if (accessTokenMatch && expiresIn) {
         accessToken = accessTokenMatch[1];
+        setTimeout(() => (window.location = redirectURI), +expiresIn[1] * 1000);
         return accessToken;
       }
 
@@ -34,9 +37,7 @@ export const Spotify = {
       }
     );
 
-   
     let data = await response.json();
-    console.log(data);
     if (data.error) {
       return data;
     } else {
@@ -46,7 +47,31 @@ export const Spotify = {
         img: album.images[0].url,
         id: album.id,
       }));
-      //return newReleases;
     }
   },
+
+  async trackSearch(term) {
+    this.getAccessToken();
+
+    let response = await fetch(`https://api.spotify.com/v1/search?q=${term}&type=track`,
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      }
+    }
+    );
+
+    let data = await response.json();
+    console.log(data);
+    if (data.error) {
+      return data;
+    } else {
+      return data.tracks.items.map((track) => ({
+        artist: track.artists[0].name,
+        name: track.name,
+        img: track.album.images[0].url,
+        id: track.id,
+      }));
+    }
+  }
 };

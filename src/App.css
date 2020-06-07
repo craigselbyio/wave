@@ -28,15 +28,3 @@ h2 {
 h4 {
   font-size: calc(4px + 1vmin);
 }
-.search-input {
-  width: 900px;
-  margin: 2rem 0;
-  border: 0;
-  border-bottom: 5px solid #FFF;
-  background-color: transparent;
-  font-size: 1.5rem;
-  font-weight: bold;
-  outline: none;
-  text-transform: uppercase;
-  text-align: center;
-}

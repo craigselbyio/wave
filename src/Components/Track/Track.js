@@ -2,7 +2,7 @@ import React from "react";
 import "./track.css";
 import motorsport from "../../img/motorsport-migos-nickiminaj-cardib.png";
 
-const Track = ({ trackType, track, addToPlaylist, isInPlaylist }) => {
+const Track = ({ trackType, trackLocation, track, addToPlaylist, isInPlaylist }) => {
   return (
     <div className="track">
       {trackType === "large" ? <img src={track.img} alt="" /> : ""}

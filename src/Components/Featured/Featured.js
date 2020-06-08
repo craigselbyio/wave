@@ -33,6 +33,7 @@ const Featured = ({ newReleases, newPlaylist, addToPlaylist }) => {
               trackType={"small"}
               track={track}
               isInPlaylist={isInPlaylist}
+              key={track.id}
             />
           ) : (
             ""

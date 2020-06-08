@@ -25,6 +25,11 @@ export const Spotify = {
     }
   },
 
+  getNewAccessTokenAfterExpired() {
+    const authorizeURL = `https://accounts.spotify.com/authorize?client_id=${clientID}&redirect_uri=${redirectURI}&scope=user-read-private%20user-read-email%20playlist-modify-public&response_type=token`;
+    window.location = authorizeURL;
+  },
+
   async getNew() {
     this.getAccessToken();
 
@@ -39,7 +44,7 @@ export const Spotify = {
 
     let data = await response.json();
     if (data.error) {
-      return data;
+      data.error.status === 401 && this.getNewAccessTokenAfterExpired();
     } else {
       return data.albums.items.map((album) => ({
         artist: album.artists[0].name,
@@ -53,12 +58,13 @@ export const Spotify = {
   async trackSearch(term) {
     this.getAccessToken();
 
-    let response = await fetch(`https://api.spotify.com/v1/search?q=${term}&type=track`,
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
+    let response = await fetch(
+      `https://api.spotify.com/v1/search?q=${term}&type=track`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       }
-    }
     );
 
     let data = await response.json();
@@ -73,5 +79,5 @@ export const Spotify = {
         id: track.id,
       }));
     }
-  }
+  },
 };

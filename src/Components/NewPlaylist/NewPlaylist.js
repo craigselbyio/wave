@@ -11,7 +11,7 @@ const NewPlaylist = ({ Playlist, removePlaylistItem }) => {
       />
       <div className="playlist-items">
         {Playlist.map((track) => (
-          <div className="playlist-item">
+          <div className="playlist-item" key={track.id}>
             <div className="playlist-item-remove" onClick={() => removePlaylistItem(track)}></div>
             <img src={track.img} alt="" />
             <h5 className="playlist-item-name">{ track.name.length > 20 ? `${track.name.substring(0,20)}...` : track.name }</h5>

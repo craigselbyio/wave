@@ -36,7 +36,7 @@ const Search = ({ addToPlaylist, newPlaylist, trackSearch ,searchResults }) => {
         {searchResults.map((track) => (
           <Track
             addToPlaylist={addToPlaylist}
-            trackType={"small"}
+            trackType={"large"}
             track={track}
             isInPlaylist={isInPlaylist}
           />

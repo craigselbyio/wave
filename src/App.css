@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  padding: 0 2rem;
 }
 
 .App-logo {
@@ -27,4 +28,19 @@ h2 {
 }
 h4 {
   font-size: calc(4px + 1vmin);
+}
+.home-view-btn {
+  background-color: transparent;
+  border: none;
+  color: #21dc52;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+}
+.home-view-btn-active {
+  background-color: #21dc52;
+  color: #FFF;
 }

@@ -20,12 +20,12 @@
     height: 36px;
     border: none;
     background-color: transparent;
-    background-image: url(../../img/add-default-icon.png);
+    background-image: url(../../img/add-default-icon.svg);
     outline: none;
     cursor: pointer;
 }
 .track-in-playlist {
-    background-image: url(../../img/check-icon.png);
+    background-image: url(../../img/check-icon.svg);
     background-size: contain;
     background-repeat: no-repeat;
 

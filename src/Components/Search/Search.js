@@ -18,6 +18,7 @@ const Search = ({ addToPlaylist, newPlaylist, trackSearch ,searchResults }) => {
 
   return (
     <>
+    <div className="search-input-wrap">
       <input
         className="search-input"
         placeholder="Search for greatness_"
@@ -30,11 +31,12 @@ const Search = ({ addToPlaylist, newPlaylist, trackSearch ,searchResults }) => {
       >
         SEARCH
       </button>
+      </div>
       <div className="search-results">
         {searchResults.map((track) => (
           <Track
             addToPlaylist={addToPlaylist}
-            trackType={"large"}
+            trackType={"small"}
             track={track}
             isInPlaylist={isInPlaylist}
           />

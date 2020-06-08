@@ -59,11 +59,11 @@ async function searchGetNew() {
       </header>
       <button onClick={searchGetNew}>Search</button>
 
-      <NewPlaylist Playlist={newPlaylist} removePlaylistItem={handlePlaylistRemove} />
+      {newPlaylist.length > 0 ? <NewPlaylist Playlist={newPlaylist} removePlaylistItem={handlePlaylistRemove} /> : null}
 
       <Search addToPlaylist={handlePlaylistAdd} newPlaylist={newPlaylist} trackSearch={trackSearch} searchResults={searchResults} />
 
-      <Featured addToPlaylist={handlePlaylistAdd} newReleases={newReleases} newPlaylist={newPlaylist} />
+      {searchResults.length > 0 ? null : <Featured addToPlaylist={handlePlaylistAdd} newReleases={newReleases} newPlaylist={newPlaylist} /> }
     </div>
   );
 }

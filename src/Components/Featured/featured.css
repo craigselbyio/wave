@@ -1,33 +1,42 @@
 * {
-    color: #FFF;
+  color: #fff;
 }
 .featured-wrap {
-    display: flex;
-    max-width: 1400px;
-    margin: 4rem auto 0 auto;
+  display: flex;
+  max-width: 1400px;
+  margin: 4rem auto 0 auto;
 }
 .number-one-track {
-    width: 40vw;
-    background-image: url(../../img/new-releases.png), url(../../img/fire-bg.png);
-    background-size: 70%, contain;
-    background-position: top, top center;
-    background-repeat: no-repeat;
-    margin: 0 5rem 0 1rem;
-
+  width: 40vw;
+  background-image: url(../../img/new-releases.png), url(../../img/fire-bg.png);
+  background-size: 70%, contain;
+  background-position: center 3vh, top center;
+  background-repeat: no-repeat;
+  margin: 0 5rem 0 1rem;
+}
+.number-one-track-info-wrap {
+    width: calc(100% - 20vmin);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+.number-one-track-info {
+    text-align: left;
 }
 .number-one-track-img {
-    padding: 25% 0 0;
-    width: 60%;
+  padding: 30% 0 0;
+  width: calc(100% - 20vmin);
 }
 .number-one-track-title {
-    margin: 2rem 0 .25rem 0;
+  font-size: 2rem;
+  margin: 1rem 0 0.25rem 0;
 }
 .number-one-track-artist {
-    margin: 0;
-    font-weight: normal;
+  margin: 0;
+  font-weight: bold;
 }
 .featured-tracks {
-    width: 40vw;
-    text-align: left;
-
+  width: 40vw;
+  text-align: left;
 }

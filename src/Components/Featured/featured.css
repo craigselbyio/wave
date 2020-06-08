@@ -6,6 +6,12 @@
   max-width: 1400px;
   margin: 4rem auto 0 auto;
 }
+@media only screen and (max-width: 750px) {
+    .featured-wrap {
+        flex-direction: column;
+        margin: 0;
+    }
+}
 .number-one-track {
   width: 40vw;
   background-image: url(../../img/new-releases.png), url(../../img/fire-bg.png);
@@ -13,6 +19,12 @@
   background-position: center 3vh, top center;
   background-repeat: no-repeat;
   margin: 0 5rem 0 1rem;
+}
+@media only screen and (max-width: 750px) {
+    .number-one-track {
+        width: 100%;
+        margin: 0 0 2rem 0;
+    }
 }
 .number-one-track-info-wrap {
     width: calc(100% - 20vmin);
@@ -37,6 +49,13 @@
   font-weight: bold;
 }
 .featured-tracks {
+display: flex;
   width: 40vw;
   text-align: left;
+  flex-wrap: wrap;
+}
+@media only screen and (max-width: 750px) {
+    .featured-tracks {
+        width: 100%;
+    }
 }

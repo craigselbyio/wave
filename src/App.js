@@ -29,6 +29,11 @@ function App() {
     getNewReleases();
   }, []);
 
+  const isInPlaylist = (trackID) => {
+    let trackIDs = newPlaylist.map((track) => track.id);
+    return trackIDs.includes(trackID);
+  };
+
   const trackSearch = async (searchTerm) => {
     try {
       let searchResults = await Spotify.trackSearch(searchTerm);
@@ -40,13 +45,19 @@ function App() {
   };
 
   const handlePlaylistAdd = (track) => {
-    let newTrack = { ...track, inPlaylist: true };
-    setNewPlaylist([...newPlaylist, newTrack]);
+    if (!isInPlaylist(track.id)) {
+      let newTrack = { ...track, inPlaylist: true };
+      setNewPlaylist([...newPlaylist, newTrack]);
 
-    let matchingTrack =
-      newReleases.find((newReleaseTrack) => newReleaseTrack.id === track.id) ||
-      searchResults.find((newReleaseTrack) => newReleaseTrack.id === track.id);
-    matchingTrack.inPlaylist = true;
+      let matchingTrack =
+        newReleases.find(
+          (newReleaseTrack) => newReleaseTrack.id === track.id
+        ) ||
+        searchResults.find(
+          (newReleaseTrack) => newReleaseTrack.id === track.id
+        );
+      matchingTrack.inPlaylist = true;
+    }
   };
 
   const handlePlaylistRemove = (track) => {
@@ -62,8 +73,22 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
       </header>
 
-      <button className={`home-view-btn ${homeView === 'new' && 'home-view-btn-active'}`} onClick={() => setHomeView("new")}>New</button>
-      <button className={`home-view-btn ${homeView === 'search' && 'home-view-btn-active'}`} onClick={() => setHomeView("search")}>Search</button>
+      <button
+        className={`home-view-btn ${
+          homeView === "new" && "home-view-btn-active"
+        }`}
+        onClick={() => setHomeView("new")}
+      >
+        New
+      </button>
+      <button
+        className={`home-view-btn ${
+          homeView === "search" && "home-view-btn-active"
+        }`}
+        onClick={() => setHomeView("search")}
+      >
+        Search
+      </button>
 
       {newPlaylist.length > 0 ? (
         <NewPlaylist
@@ -86,9 +111,9 @@ function App() {
           addToPlaylist={handlePlaylistAdd}
           newReleases={newReleases}
           newPlaylist={newPlaylist}
+          isInPlaylist={isInPlaylist}
         />
       )}
-
     </div>
   );
 }

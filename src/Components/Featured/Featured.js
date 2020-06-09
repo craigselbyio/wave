@@ -2,11 +2,7 @@ import React from "react";
 import "./featured.css";
 import Track from "../Track/Track";
 
-const Featured = ({ newReleases, newPlaylist, addToPlaylist }) => {
-  const isInPlaylist = (trackID) => {
-    let trackIDs = newPlaylist.map((track) => track.id);
-    return trackIDs.includes(trackID) ? true : false;
-  };
+const Featured = ({ newReleases, newPlaylist, addToPlaylist, isInPlaylist }) => {
 
   return (
     <div className="featured-wrap">
@@ -40,6 +36,7 @@ const Featured = ({ newReleases, newPlaylist, addToPlaylist }) => {
         )}
       </div>
       <div className="featured-tracks">
+        <h4 className="featured-track-top-text">Click on Track to Create a Playlist</h4>
         {newReleases.map((track, index) =>
           index !== 0 ? (
             <Track

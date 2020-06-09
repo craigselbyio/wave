@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 
 .App-logo {
@@ -44,6 +44,11 @@ h4 {
   cursor: pointer;
   text-transform: uppercase;
   outline: none;
+  margin-left: 1rem;
+}
+.home-view-btn:hover {
+  background-color: #1f1f1f;
+  color: #FFF
 }
 .home-view-btn-active {
   background-color: #21dc52;

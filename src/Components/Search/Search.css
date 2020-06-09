@@ -25,6 +25,7 @@
   border-radius: 20px;
   font-weight: bold;
   cursor: pointer;
+  outline: none;
 }
 .track-search-btn:hover {
   background-color: #21dc52;
@@ -37,9 +38,14 @@
   flex-wrap: wrap;
 }
 .search-results .track {
-  width: 10%;
+  width: calc((100% / 8) - 1rem);
   text-align: left;
-  margin: 1rem;
+  margin: .5rem;
+}
+@media only screen and (max-width: 750px) {
+  .search-results .track {
+    width: calc((100% / 3) - 1rem);
+  }
 }
 .search-results .track h2 {
   font-size: 1rem;

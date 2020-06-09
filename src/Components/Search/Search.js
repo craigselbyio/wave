@@ -3,8 +3,7 @@ import Track from "../Track/Track";
 import "./Search.css";
 import { Spotify } from "../../util/Spotify";
 
-const Search = ({ addToPlaylist, newPlaylist, trackSearch ,searchResults }) => {
-  
+const Search = ({ addToPlaylist, newPlaylist, trackSearch, searchResults }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const isInPlaylist = (trackID) => {
@@ -18,19 +17,23 @@ const Search = ({ addToPlaylist, newPlaylist, trackSearch ,searchResults }) => {
 
   return (
     <>
-    <div className="search-input-wrap">
-      <input
-        className="search-input"
-        placeholder="Search for greatness_"
-        value={searchTerm}
-        onChange={handleSearchTermChange}
-      />
-      <button
-        className="track-search-btn"
-        onClick={() => trackSearch(searchTerm)}
-      >
-        SEARCH
-      </button>
+      <div className="search-input-wrap">
+        <form onSubmit={() => trackSearch(searchTerm)}>
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Search for greatness_"
+            value={searchTerm}
+            onChange={handleSearchTermChange}
+          />
+        </form>
+        <button
+        type="submit"
+          className="track-search-btn"
+          onClick={() => trackSearch(searchTerm)}
+        >
+          SEARCH
+        </button>
       </div>
       <div className="search-results">
         {searchResults.map((track) => (

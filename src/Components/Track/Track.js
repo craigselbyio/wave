@@ -4,8 +4,8 @@ import motorsport from "../../img/motorsport-migos-nickiminaj-cardib.png";
 
 const Track = ({ trackType, trackLocation, track, addToPlaylist, isInPlaylist }) => {
   return (
-    <div className="track">
-      <img onClick={() => addToPlaylist(track)} className={isInPlaylist(track.id) ? "track-info-img track-in-playlist" : "track-info-img"} src={track.img} alt="" />
+    <div onClick={() => addToPlaylist(track)} className="track">
+      <img className={isInPlaylist(track.id) ? "track-info-img track-in-playlist" : "track-info-img"} src={track.img} alt="" />
 
       <div className="track-info">
         <h2 className="track-title">{ track.name.length > 20 ? `${track.name.substring(0,20)}...` : track.name }</h2>

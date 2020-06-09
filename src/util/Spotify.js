@@ -42,13 +42,22 @@ export const Spotify = {
       }
     );
 
-    //let data = {error: {status: 401}};
-
-    //data.error.status === 401 && this.getNewAccessTokenAfterExpired();
+    /*
+    //Test Error Response
+    let data = {
+        error: {status: 401,
+        message: "The access token expired"}
+    };
+    return data;
+    */
 
     let data = await response.json();
-    if (data.error) {
-      data.error.status == 401 && this.getNewAccessTokenAfterExpired();
+
+    //Check if repsonse is Token invalid or Expired, attempt to get a new one
+    if (data.error && data.error.status === 401) {
+      console.log('401 logging')
+      this.getNewAccessTokenAfterExpired();
+      return data;
     } else {
       return data.albums.items.map((album) => ({
         artist: album.artists[0].name,

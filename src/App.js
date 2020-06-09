@@ -74,20 +74,16 @@ function App() {
       </header>
 
       <button
-        className={`home-view-btn ${
-          homeView === "new" && "home-view-btn-active"
-        }`}
+        className={`home-view-btn ${homeView === "new" && "home-view-btn-active"}`}
         onClick={() => setHomeView("new")}
       >
-        New
+        New Tracks
       </button>
       <button
-        className={`home-view-btn ${
-          homeView === "search" && "home-view-btn-active"
-        }`}
+        className={`home-view-btn ${homeView === "search" && "home-view-btn-active"}`}
         onClick={() => setHomeView("search")}
       >
-        Search
+        Search Tracks
       </button>
 
       {newPlaylist.length > 0 ? (

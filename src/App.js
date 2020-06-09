@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
   const getNewReleases = async () => {
-  if(spotifyStatus.status === "current" ) {
+  if(Spotify.hasAccessTokenInURI()) {
     try {
       let response = await Spotify.getNew();
       returnIfSpotifyTokenExpired(response);

@@ -3,6 +3,18 @@ const redirectURI = "http://localhost:3000";
 let accessToken;
 
 export const Spotify = {
+  hasAccessTokenInURI() {
+    const accessTokenMatch = window.location.href.match("access_token=([^&]*)");
+
+    const expiresIn = window.location.href.match("expires_in=([^&]*)");
+
+    if (accessTokenMatch && expiresIn) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+
   getAccessToken() {
     if (accessToken) {
       return accessToken;
@@ -55,7 +67,7 @@ export const Spotify = {
 
     //Check if repsonse is Token invalid or Expired, attempt to get a new one
     if (data.error && data.error.status === 401) {
-      console.log('401 logging')
+      console.log("401 logging");
       this.getNewAccessTokenAfterExpired();
       return data;
     } else {
@@ -81,8 +93,10 @@ export const Spotify = {
     );
 
     let data = await response.json();
-    console.log(data);
-    if (data.error) {
+    //Check if repsonse is Token invalid or Expired, attempt to get a new one
+    if (data.error && data.error.status === 401) {
+      console.log("401 logging");
+      this.getNewAccessTokenAfterExpired();
       return data;
     } else {
       return data.tracks.items.map((track) => ({

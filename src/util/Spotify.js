@@ -42,9 +42,13 @@ export const Spotify = {
       }
     );
 
+    //let data = {error: {status: 401}};
+
+    //data.error.status === 401 && this.getNewAccessTokenAfterExpired();
+
     let data = await response.json();
     if (data.error) {
-      data.error.status === 401 && this.getNewAccessTokenAfterExpired();
+      data.error.status == 401 && this.getNewAccessTokenAfterExpired();
     } else {
       return data.albums.items.map((album) => ({
         artist: album.artists[0].name,

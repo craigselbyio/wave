@@ -16,18 +16,46 @@ function App() {
 
   const [homeView, setHomeView] = useState("new");
 
-  useEffect(() => {
-    const getNewReleases = async () => {
-      let response = await Spotify.getNew();
+  const [spotifyStatus, setSpotifyStatus] = useState({
+    status: "",
+    errorMessage: ""
+  });
 
-      if (response.error) {
-        console.log(response.error);
-      } else {
-        setNewReleases(response);
-      }
-    };
+  useEffect(() => {
+  const getNewReleases = async () => {
+  if(spotifyStatus.status === "current" ) {
+    try {
+      let response = await Spotify.getNew();
+      returnIfSpotifyTokenExpired(response);
+      setNewReleases(response);    
+     } catch(error) {
+       console.log(error);
+     }
+  }
+};
     getNewReleases();
   }, []);
+
+
+  const returnIfSpotifyTokenExpired = (response) => {
+    if (response.error && response.error.status === 401) {
+      console.log('error recevied!');
+      setSpotifyStatus({status: "expired", errorMessage: "Access Expired, Reconnect"});
+      return;
+  } else {
+    setSpotifyStatus({status: "current", errorMessage: ""});
+  }
+}
+
+ const getNewReleases = async () => {
+   try {
+    let response = await Spotify.getNew();
+    returnIfSpotifyTokenExpired(response);
+    setNewReleases(response);    
+   } catch(error) {
+     console.log(error);
+   }
+};
 
   const isInPlaylist = (trackID) => {
     let trackIDs = newPlaylist.map((track) => track.id);
@@ -36,9 +64,9 @@ function App() {
 
   const trackSearch = async (searchTerm) => {
     try {
-      let searchResults = await Spotify.trackSearch(searchTerm);
-      console.log(searchResults);
-      setSearchResults([...searchResults]);
+      let response = await Spotify.trackSearch(searchTerm);
+      returnIfSpotifyTokenExpired(response);
+      setSearchResults([...response]);
     } catch (error) {
       console.log(error);
     }
@@ -73,6 +101,15 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
       </header>
 
+      {spotifyStatus.status !== "current" &&
+      <button
+      className="connect-to-spotify-btn"
+      onClick={getNewReleases}
+    >
+      {spotifyStatus.errorMessage ? spotifyStatus.errorMessage : "Connect to Spotify"}
+    </button>
+      }
+
       <button
         className={`home-view-btn ${homeView === "new" && "home-view-btn-active"}`}
         onClick={() => setHomeView("new")}
@@ -102,7 +139,7 @@ function App() {
         />
       )}
 
-      {homeView === "new" && (
+      {(homeView === "new" && newReleases.length > 0) && (
         <Featured
           addToPlaylist={handlePlaylistAdd}
           newReleases={newReleases}

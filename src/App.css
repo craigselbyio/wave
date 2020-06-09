@@ -34,6 +34,18 @@ h4 {
     font-size: calc(4px + 2vmin);
   }
 }
+.connect-to-spotify-btn {
+  background-color: transparent;
+  border: 2px solid #21dc52;
+  color: #21dc52;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  margin-left: 1rem;
+}
 .home-view-btn {
   background-color: transparent;
   border: none;

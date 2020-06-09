@@ -4,7 +4,7 @@ import "./NewPlaylist.css";
 const NewPlaylist = ({ Playlist, removePlaylistItem }) => {
   return (
     <div className="new-playlist">
-      <button id="save-playlist">SAVE</button>
+      <button className="save-playlist-btn">SAVE</button>
       <input
         type="text"
         className="playlist-name-input"

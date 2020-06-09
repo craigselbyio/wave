@@ -29,6 +29,11 @@ h2 {
 h4 {
   font-size: calc(4px + 1vmin);
 }
+@media only screen and (max-width: 750px) {
+  h4 {
+    font-size: calc(4px + 2vmin);
+  }
+}
 .home-view-btn {
   background-color: transparent;
   border: none;

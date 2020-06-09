@@ -1,7 +1,7 @@
 .search-input-wrap {
   width: calc(100% - 50vw);
   position: relative;
-  margin: 5rem auto 1rem auto;
+  margin: 5rem auto 3rem auto;
 }
 .search-input {
   width: 100%;
@@ -37,9 +37,9 @@
   flex-wrap: wrap;
 }
 .search-results .track {
+  width: 10%;
   text-align: left;
-  width: 300px;
-  margin: 1rem 2rem;
+  margin: 1rem;
 }
 .search-results .track h2 {
   font-size: 1rem;

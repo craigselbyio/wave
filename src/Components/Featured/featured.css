@@ -7,10 +7,10 @@
   margin: 4rem auto 0 auto;
 }
 @media only screen and (max-width: 750px) {
-    .featured-wrap {
-        flex-direction: column;
-        margin: 0;
-    }
+  .featured-wrap {
+    flex-direction: column;
+    margin: 0;
+  }
 }
 .number-one-track {
   width: 40vw;
@@ -21,20 +21,20 @@
   margin: 0 5rem 0 1rem;
 }
 @media only screen and (max-width: 750px) {
-    .number-one-track {
-        width: 100%;
-        margin: 0 0 2rem 0;
-    }
+  .number-one-track {
+    width: 100%;
+    margin: 0 0 2rem 0;
+  }
 }
 .number-one-track-info-wrap {
-    width: calc(100% - 20vmin);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 auto;
+  width: calc(100% - 20vmin);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
 }
 .number-one-track-info {
-    text-align: left;
+  text-align: left;
 }
 .number-one-track-img {
   padding: 30% 0 0;
@@ -48,14 +48,19 @@
   margin: 0;
   font-weight: bold;
 }
+.featured-track-top-text {
+  flex-basis: 100%;
+  margin: 0 0 1rem 0;
+  text-align: center;
+}
 .featured-tracks {
-display: flex;
+  display: flex;
   width: 40vw;
   text-align: left;
   flex-wrap: wrap;
 }
 @media only screen and (max-width: 750px) {
-    .featured-tracks {
-        width: 100%;
-    }
+  .featured-tracks {
+    width: 100%;
+  }
 }

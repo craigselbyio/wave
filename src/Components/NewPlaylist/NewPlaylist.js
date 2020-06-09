@@ -6,6 +6,7 @@ const NewPlaylist = ({ Playlist, removePlaylistItem }) => {
     <div className="new-playlist">
       <button id="save-playlist">SAVE</button>
       <input
+        type="text"
         className="playlist-name-input"
         placeholder="Name me, so i know its real_"
       />

@@ -38,6 +38,7 @@ const Search = ({ addToPlaylist, newPlaylist, trackSearch, searchResults }) => {
       <div className="search-results">
         {searchResults.map((track) => (
           <Track
+            key={track}
             addToPlaylist={addToPlaylist}
             trackType={"large"}
             track={track}

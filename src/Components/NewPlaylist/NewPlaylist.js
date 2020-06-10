@@ -1,17 +1,28 @@
 import React from "react";
 import "./NewPlaylist.css";
+import { Spotify } from  '../../util/Spotify';
 
-const NewPlaylist = ({ Playlist, removePlaylistItem }) => {
+const NewPlaylist = ({ newPlaylist, removePlaylistItem }) => {
+
+  const trackURISArray = () => {
+    return newPlaylist.map(track => track.uri)
+  }
+
+  const createNewPlaylist = async (playlistname, trackURISArray) => {
+    let data = await Spotify.addTracksToNewPlaylist(playlistname, trackURISArray());
+    console.log(data);
+  }
+
   return (
     <div className="new-playlist">
-      <button className="save-playlist-btn">SAVE</button>
+      <button onClick={() => createNewPlaylist("New Playlist", trackURISArray)} className="save-playlist-btn">SAVE</button>
       <input
         type="text"
         className="playlist-name-input"
         placeholder="Name me, so i know its real_"
       />
       <div className="playlist-items">
-        {Playlist.map((track) => (
+        {newPlaylist.map((track) => (
           <div className="playlist-item" key={track.id}>
             <div className="playlist-item-remove" onClick={() => removePlaylistItem(track)}></div>
             <img src={track.img} alt="" />

@@ -46,7 +46,7 @@ export const Spotify = {
     this.getAccessToken();
 
     let response = await fetch(
-      "https://api.spotify.com/v1/browse/new-releases",
+      "https://api.spotify.com/v1/playlists/37i9dQZEVXbLRQDuF5jeBp/tracks",
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -71,11 +71,12 @@ export const Spotify = {
       this.getNewAccessTokenAfterExpired();
       return data;
     } else {
-      return data.albums.items.map((album) => ({
-        artist: album.artists[0].name,
-        name: album.name,
-        img: album.images[0].url,
-        id: album.id,
+      return data.items.map((item) => ({
+        artist: item.track.album.artists[0].name,
+        name: item.track.name,
+        img: item.track.album.images[0].url,
+        id: item.track.id,
+        uri: item.track.uri
       }));
     }
   },
@@ -99,12 +100,76 @@ export const Spotify = {
       this.getNewAccessTokenAfterExpired();
       return data;
     } else {
+      console.log(data)
       return data.tracks.items.map((track) => ({
         artist: track.artists[0].name,
         name: track.name,
         img: track.album.images[0].url,
         id: track.id,
+        uri: track.uri
       }));
     }
   },
+
+  async getCurrentUserID() {
+    this.getAccessToken();
+
+    let response =  await fetch('https://api.spotify.com/v1/me', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+
+    let data = await response.json();
+
+    return data.id;
+  },
+
+  async createNewPlaylist(playlistName) {
+
+    let userID = await this.getCurrentUserID();
+
+    let body = JSON.stringify({
+      name: playlistName
+    });
+
+    let response =  await fetch(`https://api.spotify.com/v1/users/${userID}/playlists`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+         Authorization: `Bearer ${accessToken}`
+      },
+      body: body
+    })
+
+    let data = await response.json();
+
+    let playlistID = await data.id;
+
+    return playlistID;
+  },
+
+  async addTracksToNewPlaylist(playlistName, trackURISArray) {
+
+    let playlistID = await this.createNewPlaylist(playlistName);
+
+    let body = JSON.stringify({
+      uris: trackURISArray
+    });
+
+    let response =  await fetch(`https://api.spotify.com/v1/playlists/${playlistID}/tracks`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+         Authorization: `Bearer ${accessToken}`
+      },
+      body: body
+    })
+
+    return response.json();
+
+  }
+
 };

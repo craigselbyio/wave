@@ -10,11 +10,11 @@ const Featured = ({
 }) => {
   return (
     <div className="featured-wrap">
-      <div className="number-one-track">
+      <div className="number-one-track-wrap">
         {newReleases.map(
           (track, index) =>
             index === 0 && (
-              <>
+              <div className="number-one-track">
                 <img
                   onClick={() => addToPlaylist(track)}
                   className={isInPlaylist(track.id) ? 'number-one-track-img track-in-playlist': 'number-one-track-img'}
@@ -36,13 +36,13 @@ const Featured = ({
                     disabled={isInPlaylist(track.id) ? "disabled" : ""}
                   ></button>
                 </div>
-              </>
+                </div>
             )
         )}
       </div>
       <div className="featured-tracks">
         <h4 className="featured-track-top-text">
-          Click on Track to Create a Playlist
+          Click on Track or Search to Create a Playlist
         </h4>
         {newReleases.map((track, index) =>
           index !== 0 ? (

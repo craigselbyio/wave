@@ -14,7 +14,7 @@ const Featured = ({
         {newReleases.map(
           (track, index) =>
             index === 0 && (
-              <div className="number-one-track">
+              <div className="number-one-track" key={track.id}>
                 <img
                   onClick={() => addToPlaylist(track)}
                   className={isInPlaylist(track.id) ? 'number-one-track-img track-in-playlist': 'number-one-track-img'}

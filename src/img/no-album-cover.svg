@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" height="300" viewBox="0 0 300 300">
+  <defs>
+    <clipPath id="clip-no-album-cover">
+      <rect width="300" height="300"/>
+    </clipPath>
+  </defs>
+  <g id="no-album-cover" clip-path="url(#clip-no-album-cover)">
+    <rect width="300" height="300" fill="#090909"/>
+    <g id="compact-disc" transform="translate(47 46.999)">
+      <path id="Path_587" data-name="Path 587" d="M195.113,58.4a102.576,102.576,0,1,0-20.079,116.636A102.339,102.339,0,0,0,195.113,58.4ZM85.344,119.724a24.31,24.31,0,1,1,34.377,0A24.309,24.309,0,0,1,85.344,119.724Z" transform="translate(0 0)" fill="#bfc3ce"/>
+      <path id="Path_588" data-name="Path 588" d="M205.733,69.849a102.916,102.916,0,0,0-53.65-50.75A610.29,610.29,0,0,1,17.716,151.536,102.884,102.884,0,0,0,70.375,207.2,610.2,610.2,0,0,1,205.733,69.849ZM95.964,131.173a24.31,24.31,0,1,1,34.377,0A24.309,24.309,0,0,1,95.964,131.173Z" transform="translate(-10.62 -11.449)" fill="#e6e6e6"/>
+      <path id="Path_589" data-name="Path 589" d="M220.193,156.056a45.353,45.353,0,1,0,0,64.139A45.366,45.366,0,0,0,220.193,156.056Zm-49.258,49.259a24.309,24.309,0,1,1,34.378,0A24.291,24.291,0,0,1,170.935,205.314Z" transform="translate(-85.591 -85.592)" fill="#818e96"/>
+      <path id="Path_590" data-name="Path 590" d="M214.934,242.366a27.446,27.446,0,1,1,19.409-8.038h0A27.271,27.271,0,0,1,214.934,242.366Zm0-48.617A21.169,21.169,0,1,0,229.9,229.886h0a21.169,21.169,0,0,0-14.969-36.138Z" transform="translate(-112.401 -112.384)" fill="#e6e6e6"/>
+    </g>
+    <g id="Rectangle_6" data-name="Rectangle 6" fill="none" stroke="#fff" stroke-width="2">
+      <rect width="300" height="300" stroke="none"/>
+      <rect x="1" y="1" width="298" height="298" fill="none"/>
+    </g>
+  </g>
+</svg>

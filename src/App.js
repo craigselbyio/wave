@@ -4,9 +4,8 @@ import "./App.css";
 import Featured from "./Components/Featured/Featured";
 import { Spotify } from "./util/Spotify";
 import NewPlaylist from "./Components/NewPlaylist/NewPlaylist";
-import motorsport from "./img/motorsport-migos-nickiminaj-cardib.png";
-import musicMan from "./img/music-man.svg";
 import Search from "./Components/Search/Search";
+import Playlists from "./Components/Playlists/Playlists";
 
 function App() {
   const [newReleases, setNewReleases] = useState([]);
@@ -19,44 +18,43 @@ function App() {
 
   const [spotifyStatus, setSpotifyStatus] = useState({
     status: "",
-    errorMessage: ""
+    errorMessage: "",
   });
 
   useEffect(() => {
-  const getNewReleases = async () => {
-  if(Spotify.hasAccessTokenInURI()) {
-    try {
-      let response = await Spotify.getNew();
-      returnIfSpotifyTokenExpired(response);
-      setNewReleases(response);    
-     } catch(error) {
-       console.log(error);
-     }
-  }
-};
+    const getNewReleases = async () => {
+      if (Spotify.hasAccessTokenInURI()) {
+        try {
+          let response = await Spotify.getNew();
+          returnIfSpotifyTokenExpired(response);
+          setNewReleases(response);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
     getNewReleases();
   }, []);
 
-
   const returnIfSpotifyTokenExpired = (response) => {
     if (response.error && response.error.status === 401) {
-      console.log('error recevied!');
-      setSpotifyStatus({status: "expired", errorMessage: "Connecting..."});
+      console.log("error recevied!");
+      setSpotifyStatus({ status: "expired", errorMessage: "Connecting..." });
       return;
-  } else {
-    setSpotifyStatus({status: "current", errorMessage: ""});
-  }
-}
+    } else {
+      setSpotifyStatus({ status: "current", errorMessage: "" });
+    }
+  };
 
- const getNewReleases = async () => {
-   try {
-    let response = await Spotify.getNew();
-    returnIfSpotifyTokenExpired(response);
-    setNewReleases(response);    
-   } catch(error) {
-     console.log(error);
-   }
-};
+  const getNewReleases = async () => {
+    try {
+      let response = await Spotify.getNew();
+      returnIfSpotifyTokenExpired(response);
+      setNewReleases(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const isInPlaylist = (trackID) => {
     let trackIDs = newPlaylist.map((track) => track.id);
@@ -102,31 +100,44 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
       </header>
 
-{spotifyStatus.status === "current" && (
-  <>
-      <button
-        className={`home-view-btn ${homeView === "new" && "home-view-btn-active"}`}
-        onClick={() => setHomeView("new")}
-      >
-        New Tracks
-      </button>
-      <button
-        className={`home-view-btn ${homeView === "search" && "home-view-btn-active"}`}
-        onClick={() => setHomeView("search")}
-      >
-        Search Tracks
-      </button>
-      </>
-)}
+      {spotifyStatus.status === "current" && (
+        <>
+          <button
+            className={`home-view-btn ${
+              homeView === "new" && "home-view-btn-active"
+            }`}
+            onClick={() => setHomeView("new")}
+          >
+            New Tracks
+          </button>
+          <button
+            className={`home-view-btn ${
+              homeView === "search" && "home-view-btn-active"
+            }`}
+            onClick={() => setHomeView("search")}
+          >
+            Search Tracks
+          </button>
+          <button
+            className={`home-view-btn ${
+              homeView === "playlists" && "home-view-btn-active"
+            }`}
+            onClick={() => setHomeView("playlists")}
+          >
+            Playlists
+          </button>
+        </>
+      )}
 
-      {spotifyStatus.status !== "current" &&
-      <div
-      className="connect-to-spotify"
-      onClick={getNewReleases}
-    > 
-    <h3 className="connect-to-spotify-text">{spotifyStatus.errorMessage ? spotifyStatus.errorMessage : "Connect to Spotify"}</h3>
-    </div>
-      }
+      {spotifyStatus.status !== "current" && (
+        <div className="connect-to-spotify" onClick={getNewReleases}>
+          <h3 className="connect-to-spotify-text">
+            {spotifyStatus.errorMessage
+              ? spotifyStatus.errorMessage
+              : "Connect to Spotify"}
+          </h3>
+        </div>
+      )}
 
       {newPlaylist.length > 0 ? (
         <NewPlaylist
@@ -144,7 +155,7 @@ function App() {
         />
       )}
 
-      {(homeView === "new" && newReleases.length > 0) && (
+      {homeView === "new" && newReleases.length > 0 && (
         <Featured
           addToPlaylist={handlePlaylistAdd}
           newReleases={newReleases}
@@ -152,6 +163,8 @@ function App() {
           isInPlaylist={isInPlaylist}
         />
       )}
+
+      {homeView === "playlists" && <Playlists />}
     </div>
   );
 }

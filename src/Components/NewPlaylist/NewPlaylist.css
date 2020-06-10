@@ -66,6 +66,7 @@
   font-weight: bold;
   cursor: pointer;
   z-index: 10;
+  outline: none;
 }
 .save-playlist-btn:hover {
   background-color: #21dc52;

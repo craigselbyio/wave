@@ -4,7 +4,7 @@
 }
 
 .App-logo {
-  width: 10vmin;
+  width: 15vmin;
   pointer-events: none;
 }
 
@@ -36,8 +36,8 @@ h4 {
 }
 .connect-to-spotify-btn {
   background-color: transparent;
-  border: 2px solid #21dc52;
-  color: #21dc52;
+  border: 2px solid #FFF;
+  color: #FFF;
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-weight: bold;
@@ -49,7 +49,7 @@ h4 {
 .home-view-btn {
   background-color: transparent;
   border: none;
-  color: #21dc52;
+  color: #FFF;
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-weight: bold;
@@ -63,6 +63,27 @@ h4 {
   color: #FFF
 }
 .home-view-btn-active {
-  background-color: #21dc52;
-  color: #FFF;
+  background-color: #FFF;
+  color: #1f1f1f;
+}
+.connect-to-spotify {
+  width: 10vmax;
+  height: 40vh;
+  background-image: url(./img/music-man.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 5rem auto 0;
+  cursor: pointer;
+}
+.connect-to-spotify:hover {
+  background-image: url(./img/music-man-hover.svg);
+}
+.connect-to-spotify:hover .connect-to-spotify-text {
+  border-color: #32FFFF;
+}
+.connect-to-spotify-text {
+  margin-top: 42vh;
+  display: inline-block;
+  border-bottom: 5px solid #FFF;
 }

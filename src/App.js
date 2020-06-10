@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import logo from "./img/wave-logo.svg";
+import logo from "./img/wave-logo-v2.svg";
 import "./App.css";
 import Featured from "./Components/Featured/Featured";
 import { Spotify } from "./util/Spotify";
 import NewPlaylist from "./Components/NewPlaylist/NewPlaylist";
 import motorsport from "./img/motorsport-migos-nickiminaj-cardib.png";
+import musicMan from "./img/music-man.svg";
 import Search from "./Components/Search/Search";
 
 function App() {
@@ -40,7 +41,7 @@ function App() {
   const returnIfSpotifyTokenExpired = (response) => {
     if (response.error && response.error.status === 401) {
       console.log('error recevied!');
-      setSpotifyStatus({status: "expired", errorMessage: "Access Expired, Reconnect"});
+      setSpotifyStatus({status: "expired", errorMessage: "Connecting..."});
       return;
   } else {
     setSpotifyStatus({status: "current", errorMessage: ""});
@@ -101,15 +102,8 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
       </header>
 
-      {spotifyStatus.status !== "current" &&
-      <button
-      className="connect-to-spotify-btn"
-      onClick={getNewReleases}
-    >
-      {spotifyStatus.errorMessage ? spotifyStatus.errorMessage : "Connect to Spotify"}
-    </button>
-      }
-
+{spotifyStatus.status === "current" && (
+  <>
       <button
         className={`home-view-btn ${homeView === "new" && "home-view-btn-active"}`}
         onClick={() => setHomeView("new")}
@@ -122,10 +116,21 @@ function App() {
       >
         Search Tracks
       </button>
+      </>
+)}
+
+      {spotifyStatus.status !== "current" &&
+      <div
+      className="connect-to-spotify"
+      onClick={getNewReleases}
+    > 
+    <h3 className="connect-to-spotify-text">{spotifyStatus.errorMessage ? spotifyStatus.errorMessage : "Connect to Spotify"}</h3>
+    </div>
+      }
 
       {newPlaylist.length > 0 ? (
         <NewPlaylist
-          Playlist={newPlaylist}
+          newPlaylist={newPlaylist}
           removePlaylistItem={handlePlaylistRemove}
         />
       ) : null}

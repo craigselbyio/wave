@@ -142,7 +142,9 @@ function App() {
       {newPlaylist.length > 0 ? (
         <NewPlaylist
           newPlaylist={newPlaylist}
+          setNewPlaylist={setNewPlaylist}
           removePlaylistItem={handlePlaylistRemove}
+          setHomeView={setHomeView}
         />
       ) : null}
 

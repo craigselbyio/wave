@@ -21,7 +21,7 @@ const Playlists = () => {
         <div className="playlists">
             {playlists ? (
             playlists.map(playlist => (
-                <a href={playlist.spotifyLink} target="new">
+                <a href={playlist.spotifyLink} target="new" key={playlists.id}>
                 <div className="playlist">
                     <img className="playlist-img" src={playlist.img ? playlist.img : noCover} alt="" />
                     <h4>{playlist.name}</h4>

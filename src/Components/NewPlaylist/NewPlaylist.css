@@ -3,7 +3,7 @@
   max-width: 1400px;
   margin: 0 auto;
   background-color: #161616;
-  padding: 2rem 2rem 1rem;
+  padding: 2rem 2rem 2rem;
   border-radius: 20px;
   top: 1rem;
 }
@@ -15,7 +15,6 @@
   font-size: 1rem;
   font-weight: bold;
   outline: none;
-  text-transform: uppercase;
   text-align: left;
 }
 .playlist-items {
@@ -28,6 +27,11 @@
   text-align: left;
   width: calc((100% / 12) - 1rem);
   margin: .5rem;
+}
+@media only screen and (max-width: 800px) {
+  .playlist-item {
+    width: calc((100% / 3) - 1rem);
+  }
 }
 .playlist-item img {
   left: 0;

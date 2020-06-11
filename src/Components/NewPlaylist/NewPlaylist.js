@@ -54,7 +54,7 @@ const NewPlaylist = ({
           <input
             type="text"
             className="playlist-name-input"
-            placeholder="Name me, so i know its real_"
+            placeholder="Playlist Name_"
             onChange={handlePlaylistNameInput}
             value={playlistState.playlistName}
           />
@@ -78,8 +78,8 @@ const NewPlaylist = ({
         </>
       ) : (
         <div onClick={finishPlaylistSave}>
-          <h1>
-            Playlist Saved, CLick to View Playlists
+          <h1 style={{cursor: "pointer", display: "inline-block"}}>
+            Playlist Saved, View all Playlists
           </h1>
         </div>
       )}

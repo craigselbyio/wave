@@ -108,7 +108,7 @@ function App() {
             }`}
             onClick={() => setHomeView("new")}
           >
-            New Tracks
+            Most Popular
           </button>
           <button
             className={`home-view-btn ${

@@ -19,15 +19,19 @@ const NewPlaylist = ({
   };
 
   const createNewPlaylist = async () => {
-    try {
-      setPlaylistState({ ...playlistState, status: "Saving..." });
-      await Spotify.addTracksToNewPlaylist(
-        playlistState.playlistName,
-        trackURISArray()
-      );
-      setPlaylistState({ ...playlistState, status: "Saved!" });
-    } catch (error) {
-      setPlaylistState({ ...playlistState, status: "Error!" });
+    if (playlistState.playlistName === "") {
+      setPlaylistState({ ...playlistState, status: "ENTER PLAYLIST NAME" });
+    } else {
+      try {
+        setPlaylistState({ ...playlistState, status: "Saving..." });
+        await Spotify.addTracksToNewPlaylist(
+          playlistState.playlistName,
+          trackURISArray()
+        );
+        setPlaylistState({ ...playlistState, status: "Saved!" });
+      } catch (error) {
+        setPlaylistState({ ...playlistState, status: "Error!" });
+      }
     }
   };
 
@@ -42,7 +46,8 @@ const NewPlaylist = ({
 
   return (
     <div className="new-playlist">
-      {playlistState.status === "SAVE" ? (
+      {playlistState.status === "SAVE" ||
+      playlistState.status === "ENTER PLAYLIST NAME" ? (
         <>
           <button
             onClick={() => createNewPlaylist()}
@@ -78,7 +83,7 @@ const NewPlaylist = ({
         </>
       ) : (
         <div onClick={finishPlaylistSave}>
-          <h1 style={{cursor: "pointer", display: "inline-block"}}>
+          <h1 style={{ cursor: "pointer", display: "inline-block" }}>
             Playlist Saved, View all Playlists
           </h1>
         </div>

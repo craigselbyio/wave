@@ -18,7 +18,14 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.apple-music-auth, 
+.apple-music-logout {
+  background-color: #FFF;
+  color: #000;
+  padding: .5rem 1rem;
+  margin: .5rem;
+  border: none;
+}
 .App-link {
   color: #61dafb;
 }

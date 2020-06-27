@@ -2,14 +2,21 @@ import React from "react";
 import "./track.css";
 import motorsport from "../../img/motorsport-migos-nickiminaj-cardib.png";
 
+
+
 const Track = ({ trackType, trackLocation, track, addToPlaylist, isInPlaylist }) => {
+
+  const getSizedImageURL = (url, size) => {
+    return url.replace(/{[wh]}/g, size);
+  }
+
   return (
     <div onClick={() => addToPlaylist(track)} className="track">
-      <img className={isInPlaylist(track.id) ? "track-info-img track-in-playlist" : "track-info-img"} src={track.img} alt="" />
+      <img className={isInPlaylist(track.id) ? "track-info-img track-in-playlist" : "track-info-img"} src={getSizedImageURL(track.attributes.artwork.url, "600")} alt="" />
 
       <div className="track-info">
-        <h2 className="track-title">{ track.name.length > 20 ? `${track.name.substring(0,20)}...` : track.name }</h2>
-        <h4 className="track-artist">{track.artist}</h4>
+        <h2 className="track-title">{track.attributes.name.length > 20 ? `${track.attributes.name.substring(0,20)}...` : track.attributes.name }</h2>
+        <h4 className="track-artist">{track.attributes.artistName}</h4>
       </div>
     </div>
   );

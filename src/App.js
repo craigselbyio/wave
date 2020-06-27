@@ -22,7 +22,7 @@ function App() {
   });
 
   useEffect(() => {
-    const getNewReleases = async () => {
+    /*const getNewReleases = async () => {
       if (Spotify.hasAccessTokenInURI()) {
         try {
           let response = await Spotify.getNew();
@@ -33,7 +33,28 @@ function App() {
         }
       }
     };
-    getNewReleases();
+    getNewReleases();*/
+
+    window.MusicKit.configure({
+      developerToken:
+        "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjI2UkhQQ0s0M0MifQ.eyJpYXQiOjE1OTMyMDEyNzQsImV4cCI6MTYwODc1MzI3NCwiaXNzIjoiTVA5NVI4VVZUNyJ9.Q1NgSmaiaGprYi1wEN24hL31L-xcCAUmKxKvLaYi3EcYzgfH6CyezJH0LHIzQtyDwxfta4E9Zg5f8QYTLgaxZg",
+      app: {
+        name: "wave App",
+        build: "1",
+      },
+      declarativeMarkup: true
+    });
+
+    let music = window.MusicKit.getInstance();
+    
+   music.api.charts(["songs"])
+   .then(response => {
+    setNewReleases([...response.songs[0].data])
+    console.log(response.songs[0].data.map(track =>console.log(track)))
+    
+   })
+
+
   }, []);
 
   const returnIfSpotifyTokenExpired = (response) => {
@@ -94,11 +115,27 @@ function App() {
     setNewPlaylist([...updatedPlaylist]);
   };
 
+  const stopMusic = () => {
+    let music = window.MusicKit.getInstance();
+    music.stop()
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
+
+      <button id="apple-music-authorize" className="apple-music-auth">
+        Authorize
+      </button>
+      <button id="apple-music-unauthorize" className="apple-music-logout">
+        Log Out
+      </button>
+
+      <button data-apple-music-play></button>
+
+      <button onClick={stopMusic}> STOP </button>
 
       {spotifyStatus.status === "current" && (
         <>
@@ -129,17 +166,7 @@ function App() {
         </>
       )}
 
-      {spotifyStatus.status !== "current" && (
-        <div className="connect-to-spotify" onClick={getNewReleases}>
-          <h3 className="connect-to-spotify-text">
-            {spotifyStatus.errorMessage
-              ? spotifyStatus.errorMessage
-              : "Connect to Spotify"}
-          </h3>
-        </div>
-      )}
-
-      {newPlaylist.length > 0 ? (
+      {newPlaylist.length && newPlaylist.length > 0 ? (
         <NewPlaylist
           newPlaylist={newPlaylist}
           setNewPlaylist={setNewPlaylist}

@@ -4,14 +4,14 @@ import motorsport from "../../img/motorsport-migos-nickiminaj-cardib.png";
 
 
 
-const Track = ({ trackType, trackLocation, track, addToPlaylist, isInPlaylist }) => {
+const Track = ({ addToMusicQueue, trackType, trackLocation, track, addToPlaylist, isInPlaylist }) => {
 
   const getSizedImageURL = (url, size) => {
     return url.replace(/{[wh]}/g, size);
   }
 
   return (
-    <div onClick={() => addToPlaylist(track)} className="track">
+    <div onClick={() => addToMusicQueue(track.id)} className="track">
       <img className={isInPlaylist(track.id) ? "track-info-img track-in-playlist" : "track-info-img"} src={getSizedImageURL(track.attributes.artwork.url, "600")} alt="" />
 
       <div className="track-info">

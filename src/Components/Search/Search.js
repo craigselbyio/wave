@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import Track from "../Track/Track";
 import "./Search.css";
 import { Spotify } from "../../util/Spotify";
+import NowPlaying from '../NowPlaying/NowPlaying';
 
-const Search = ({ addToPlaylist, newPlaylist, trackSearch, searchResults }) => {
+const Search = ({ addToMusicQueue, addToPlaylist, newPlaylist, trackSearch, searchResults }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const isInPlaylist = (trackID) => {
@@ -18,7 +19,7 @@ const Search = ({ addToPlaylist, newPlaylist, trackSearch, searchResults }) => {
   return (
     <>
       <div className="search-input-wrap">
-        <form onSubmit={() => trackSearch(searchTerm)}>
+        <form onSubmit={e => trackSearch(e, searchTerm)}>
           <input
             type="text"
             className="search-input"
@@ -30,14 +31,16 @@ const Search = ({ addToPlaylist, newPlaylist, trackSearch, searchResults }) => {
         <button
         type="submit"
           className="track-search-btn"
-          onClick={() => trackSearch(searchTerm)}
+          onClick={e => trackSearch(e, searchTerm)}
         >
           SEARCH
         </button>
       </div>
+      <NowPlaying />
       <div className="search-results">
         {searchResults.map((track) => (
           <Track
+          addToMusicQueue={addToMusicQueue}
             key={track.id}
             addToPlaylist={addToPlaylist}
             trackType={"large"}

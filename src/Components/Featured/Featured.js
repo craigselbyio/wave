@@ -1,8 +1,10 @@
 import React from "react";
 import "./featured.css";
 import Track from "../Track/Track";
+import NowPlaying from '../NowPlaying/NowPlaying';
 
 const Featured = ({
+  addToMusicQueue,
   newReleases,
   newPlaylist,
   addToPlaylist,
@@ -21,7 +23,7 @@ const Featured = ({
             index === 0 && (
               <div className="number-one-track" key={track.id}>
                 <img
-                  onClick={() => addToPlaylist(track)}
+                  onClick={() => addToMusicQueue(track.id)}
                   className={isInPlaylist(track.id) ? 'number-one-track-img track-in-playlist': 'number-one-track-img'}
                   src={getSizedImageURL(track.attributes.artwork.url, "1000")}
                   alt=""
@@ -46,12 +48,12 @@ const Featured = ({
         )}
       </div>
       <div className="featured-tracks">
-        <h4 className="featured-track-top-text">
-          Click on Track or Search to Create a Playlist
-        </h4>
+      <NowPlaying />
+
         {newReleases.map((track, index) =>
           index !== 0 ? (
             <Track
+              addToMusicQueue={addToMusicQueue}
               addToPlaylist={addToPlaylist}
               trackType={"small"}
               track={track}

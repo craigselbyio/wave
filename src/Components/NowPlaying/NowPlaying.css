@@ -1,0 +1,32 @@
+.now-playing {
+    left: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    flex-basis: 100%;
+    margin-bottom: 2rem;
+  }
+  .now-playing-header {
+    position: relative;
+    left: 2rem;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 2rem;
+    text-align: left;
+    color: #ffc500;
+    -webkit-text-stroke-width: 1.5px;
+    -webkit-text-stroke-color: #ffc500;
+    -webkit-text-fill-color: transparent;
+  }
+  .now-playing-img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+  }
+  .now-playing-info {
+    color: #FFF;
+    font-weight: bold;
+    display: inline-block;
+    margin-left: .5rem;
+  }

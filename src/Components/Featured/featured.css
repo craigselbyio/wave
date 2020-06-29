@@ -25,8 +25,8 @@
 .number-one-track {
   position: sticky;
   top: 0;
-  background-image: url(../../img/most-popular.png), url(../../img/fire-bg.png);
-  background-size: 70%, contain;
+  background-image: url(../../img/hot-tracks.png), url(../../img/fire-bg.png);
+  background-size: 60%, contain;
   background-position: center 3vh, top center;
   background-repeat: no-repeat;
 }

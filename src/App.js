@@ -24,17 +24,6 @@ function App() {
     errorMessage: "",
   });
 
-  window.MusicKit.configure({
-    developerToken:
-      "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjI2UkhQQ0s0M0MifQ.eyJpYXQiOjE1OTMyMDEyNzQsImV4cCI6MTYwODc1MzI3NCwiaXNzIjoiTVA5NVI4VVZUNyJ9.Q1NgSmaiaGprYi1wEN24hL31L-xcCAUmKxKvLaYi3EcYzgfH6CyezJH0LHIzQtyDwxfta4E9Zg5f8QYTLgaxZg",
-    app: {
-      name: "wave App",
-      build: "1",
-    },
-    declarativeMarkup: true,
-  });
-
-
   let music = window.MusicKit.getInstance();
 
   useEffect(() => {
@@ -55,7 +44,7 @@ function App() {
       setNewReleases([...response.songs[0].data]);
       //console.log(response.songs[0].data.map((track) => console.log(track)));
     });
-  }, [playingState]);
+  }, []);
 
   music.addEventListener("playbackStateDidChange", e => {
     e.state === 2 && console.log("2 play");
@@ -69,10 +58,10 @@ const updateNowPlaying = track => {
 
   const addToMusicQueue = (trackID) => {
     music.setQueue({ song: trackID }).then((queue) => {
-      music.stop();
-      music.play();
+      music.player.stop();
+      music.player.play();
       console.log(queue);
-      //updateNowPlaying(trackID);
+      updateNowPlaying(trackID);
     });
     
   };

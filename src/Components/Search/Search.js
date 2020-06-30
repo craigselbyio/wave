@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import Track from "../Track/Track";
 import "./Search.css";
-import { Spotify } from "../../util/Spotify";
-import NowPlaying from '../NowPlaying/NowPlaying';
+import NowPlaying from "../NowPlaying/NowPlaying";
 
-const Search = ({ addToMusicQueue, addToPlaylist, newPlaylist, trackSearch, searchResults }) => {
+const Search = ({
+  playMusic,
+  pauseMusic,
+  isPlaying,
+  playingState,
+  getSizedImageURL,
+  addToMusicQueue,
+  addToPlaylist,
+  newPlaylist,
+  trackSearch,
+  searchResults,
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const isInPlaylist = (trackID) => {
@@ -17,30 +27,35 @@ const Search = ({ addToMusicQueue, addToPlaylist, newPlaylist, trackSearch, sear
   };
 
   return (
-    <>
+    <div className="search-wrap">
+      <NowPlaying
+      playMusic={playMusic}
+        pauseMusic={pauseMusic}
+        isPlaying={isPlaying}
+        playingState={playingState}
+        getSizedImageURL={getSizedImageURL}
+      />
       <div className="search-input-wrap">
-        <form onSubmit={e => trackSearch(e, searchTerm)}>
+        <form onSubmit={(e) => trackSearch(e, searchTerm)}>
           <input
             type="text"
             className="search-input"
-            placeholder="Search for greatness_"
             value={searchTerm}
             onChange={handleSearchTermChange}
           />
         </form>
         <button
-        type="submit"
+          type="submit"
           className="track-search-btn"
-          onClick={e => trackSearch(e, searchTerm)}
+          onClick={(e) => trackSearch(e, searchTerm)}
         >
           SEARCH
         </button>
       </div>
-      <NowPlaying />
       <div className="search-results">
         {searchResults.map((track) => (
           <Track
-          addToMusicQueue={addToMusicQueue}
+            addToMusicQueue={addToMusicQueue}
             key={track.id}
             addToPlaylist={addToPlaylist}
             trackType={"large"}
@@ -49,7 +64,7 @@ const Search = ({ addToMusicQueue, addToPlaylist, newPlaylist, trackSearch, sear
           />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

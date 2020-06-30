@@ -1,8 +1,5 @@
 import React from "react";
 import "./track.css";
-import motorsport from "../../img/motorsport-migos-nickiminaj-cardib.png";
-
-
 
 const Track = ({ addToMusicQueue, trackType, trackLocation, track, addToPlaylist, isInPlaylist }) => {
 
@@ -11,7 +8,7 @@ const Track = ({ addToMusicQueue, trackType, trackLocation, track, addToPlaylist
   }
 
   return (
-    <div onClick={() => addToMusicQueue(track.id)} className="track">
+    <div onClick={() => addToMusicQueue(track)} className="track">
       <img className={isInPlaylist(track.id) ? "track-info-img track-in-playlist" : "track-info-img"} src={getSizedImageURL(track.attributes.artwork.url, "600")} alt="" />
 
       <div className="track-info">

@@ -7,7 +7,6 @@ import NewPlaylist from "./Components/NewPlaylist/NewPlaylist";
 import Search from "./Components/Search/Search";
 import Playlists from "./Components/Playlists/Playlists";
 
-
 function App() {
   const [newReleases, setNewReleases] = useState([]);
 
@@ -18,6 +17,8 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
 
   const [homeView, setHomeView] = useState("new");
+
+  const [isPlaying, setIsPlaying] = useState(null);
 
   const [spotifyStatus, setSpotifyStatus] = useState({
     status: "",
@@ -40,30 +41,31 @@ function App() {
     };
     getNewReleases();*/
 
-    music.api.charts(["albums", "songs"], {limit: 21}).then((response) => {
+    music.api.charts(["albums", "songs"], { limit: 21 }).then((response) => {
       setNewReleases([...response.songs[0].data]);
       //console.log(response.songs[0].data.map((track) => console.log(track)));
     });
-  }, []);
 
-  music.addEventListener("playbackStateDidChange", e => {
-    e.state === 2 && console.log("2 play");
-    console.log(e.state);
-    console.log(playingState);
-  });
-
-const updateNowPlaying = track => {
-  setPlayingState(track)
-}
-
-  const addToMusicQueue = (trackID) => {
-    music.setQueue({ song: trackID }).then((queue) => {
-      music.player.stop();
-      music.player.play();
-      console.log(queue);
-      updateNowPlaying(trackID);
+    music.addEventListener("playbackStateDidChange", (e) => {
+      // Add playback event state code to now playing track
+      console.log(music.player.isPlaying);
+      setIsPlaying(music.player.isPlaying);
     });
-    
+
+  }, [music, music.player.isPlaying]);
+
+  // Replace placeholders in API image url to with desired size
+  const getSizedImageURL = (url, size) => {
+    return url.replace(/{[wh]}/g, size);
+  };
+
+  const addToMusicQueue = (track) => {
+    music.setQueue({ song: track.id }).then((queue) => {
+      music.stop();
+      music.play();
+      console.log(queue);
+      setPlayingState(track);
+    });
   };
 
   const isInPlaylist = (trackID) => {
@@ -108,8 +110,12 @@ const updateNowPlaying = track => {
     setNewPlaylist([...updatedPlaylist]);
   };
 
-  const stopMusic = () => {
-    music.stop();
+  const playMusic = () => {
+    music.play();
+  };
+
+  const pauseMusic = () => {
+    music.pause();
   };
 
   return (
@@ -117,19 +123,6 @@ const updateNowPlaying = track => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
-
-      <button id="apple-music-authorize" className="apple-music-auth">
-        Authorize
-      </button>
-      <button id="apple-music-unauthorize" className="apple-music-logout">
-        Log Out
-      </button>
-
-      <button onClick={() => music.play()}> PLAY </button>
-
-      <button onClick={() => music.pause()}> PAUSE </button>
-
-      <button onClick={stopMusic}> STOP </button>
 
       <button
         className={`home-view-btn ${
@@ -167,6 +160,11 @@ const updateNowPlaying = track => {
 
       {homeView === "search" && (
         <Search
+        pauseMusic={pauseMusic}
+        playMusic={playMusic}
+        isPlaying={isPlaying}
+          playingState={playingState}
+          getSizedImageURL={getSizedImageURL}
           addToMusicQueue={addToMusicQueue}
           addToPlaylist={handlePlaylistAdd}
           newPlaylist={newPlaylist}
@@ -177,6 +175,11 @@ const updateNowPlaying = track => {
 
       {homeView === "new" && newReleases.length > 0 && (
         <Featured
+        pauseMusic={pauseMusic}
+        playMusic={playMusic}
+        isPlaying={isPlaying}
+          playingState={playingState}
+          getSizedImageURL={getSizedImageURL}
           addToMusicQueue={addToMusicQueue}
           addToPlaylist={handlePlaylistAdd}
           newReleases={newReleases}
@@ -186,7 +189,6 @@ const updateNowPlaying = track => {
       )}
 
       {homeView === "playlists" && <Playlists />}
-
     </div>
   );
 }

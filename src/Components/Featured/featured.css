@@ -4,7 +4,7 @@
 .featured-wrap {
   display: flex;
   max-width: 1400px;
-  margin: 3rem auto 0 auto;
+  margin: 3rem auto 3rem auto;
 }
 @media only screen and (max-width: 800px) {
   .featured-wrap {
@@ -75,6 +75,7 @@
   width: 50vw;
   text-align: left;
   flex-wrap: wrap;
+  margin-top: 3rem;
 }
 @media only screen and (max-width: 800px) {
   .featured-tracks {

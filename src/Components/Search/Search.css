@@ -1,5 +1,5 @@
 .search-wrap {
-  margin-top: 4rem;
+  margin-bottom: 4rem;
 }
 .search-input-wrap {
   display: flex;
@@ -14,8 +14,7 @@
   }
 }
 .search-input-wrap form {
-  width: 80%;
-  margin-right: 0.5rem;
+  width: 100%;
 }
 .search-input {
   width: 100%;
@@ -32,14 +31,16 @@
 }
 .track-search-btn {
   width: 15%;
-  padding: 0.5rem 0;
   background-color: transparent;
-  border: 1px solid #21dc52;
+  border: none;
   color: #21dc52;
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
   outline: none;
+  position: absolute;
+  right: 0;
+  height: 100%;
 }
 @media only screen and (max-width: 800px) {
   .track-search-btn {
@@ -54,17 +55,18 @@
 .search-results {
   display: flex;
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 4rem auto 9rem;
   flex-wrap: wrap;
 }
 .search-results .track {
-  width: calc((100% / 8) - 1rem);
+  width: calc((100% / 8) - 2rem);
   text-align: left;
-  margin: 0.5rem;
+  margin: 1rem;
 }
 @media only screen and (max-width: 800px) {
   .search-results .track {
     width: calc((100% / 3) - 1rem);
+    margin: .5rem;
   }
 }
 .search-results .track h2 {

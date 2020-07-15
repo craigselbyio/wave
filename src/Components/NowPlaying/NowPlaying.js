@@ -3,16 +3,19 @@ import "./NowPlaying.css";
 
 const NowPlaying = ({
   playingState,
+  playbackProgress,
   isPlaying,
   getSizedImageURL,
-  playMusic,
-  pauseMusic,
+  musicControls
 }) =>
   playingState !== null && (
     <div className="now-playing">
+      <div className="playback-progress-wrap">
+        <div className="playback-progress" style={{width: `${playbackProgress * 100}%`}}></div>
+      </div>
       <div className="now-playing-img">
         <div
-          className={isPlaying ? "now-playing-circle playing" : "now-playing-circle"}
+          className="now-playing-circle"
           style={{ animationPlayState: !isPlaying && "paused" }}
         ></div>
         <img
@@ -28,9 +31,9 @@ const NowPlaying = ({
         </div>
       </div>
       {isPlaying ? (
-        <div className="now-playing-pause" onClick={pauseMusic}></div>
+        <div className="now-playing-pause" onClick={musicControls.pauseMusic}></div>
       ) : (
-        <div className="now-playing-play" onClick={playMusic}></div>
+        <div className="now-playing-play" onClick={musicControls.playMusic}></div>
       )}
     </div>
   );

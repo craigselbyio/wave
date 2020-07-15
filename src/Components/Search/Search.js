@@ -1,57 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import Track from "../Track/Track";
 import "./Search.css";
 import NowPlaying from "../NowPlaying/NowPlaying";
 
 const Search = ({
-  playMusic,
-  pauseMusic,
+  trackSearch,
+  playbackProgress,
+  musicControls,
   isPlaying,
   playingState,
   getSizedImageURL,
   addToMusicQueue,
   addToPlaylist,
   newPlaylist,
-  trackSearch,
   searchResults,
+  isInPlaylist,
 }) => {
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const isInPlaylist = (trackID) => {
-    let trackIDs = newPlaylist.map((track) => track.id);
-    return trackIDs.includes(trackID) ? true : false;
-  };
-
-  const handleSearchTermChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
   return (
     <div className="search-wrap">
       <NowPlaying
-      playMusic={playMusic}
-        pauseMusic={pauseMusic}
+        playbackProgress={playbackProgress}
+        musicControls={musicControls}
         isPlaying={isPlaying}
         playingState={playingState}
         getSizedImageURL={getSizedImageURL}
       />
-      <div className="search-input-wrap">
-        <form onSubmit={(e) => trackSearch(e, searchTerm)}>
-          <input
-            type="text"
-            className="search-input"
-            value={searchTerm}
-            onChange={handleSearchTermChange}
-          />
-        </form>
-        <button
-          type="submit"
-          className="track-search-btn"
-          onClick={(e) => trackSearch(e, searchTerm)}
-        >
-          SEARCH
-        </button>
-      </div>
       <div className="search-results">
         {searchResults.map((track) => (
           <Track
@@ -61,6 +34,7 @@ const Search = ({
             trackType={"large"}
             track={track}
             isInPlaylist={isInPlaylist}
+            getSizedImageURL={getSizedImageURL}
           />
         ))}
       </div>

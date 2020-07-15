@@ -1,7 +1,7 @@
 * {
   color: #fff;
 }
-.featured-wrap {
+.featured-wrap, .recently-played {
   display: flex;
   max-width: 1400px;
   margin: 2rem auto 3rem;
@@ -84,10 +84,13 @@
   }
 }
 .featured-tracks .track {
-  width: calc((100% / 6) - 1rem);
+  width: calc((100% / 5) - 1rem);
 }
 @media only screen and (max-width: 1150px) {
   .featured-tracks .track {
     width: calc((100% / 3) - 1rem);
   }
+}
+.recently-played {
+  flex-basis: 100%;
 }

@@ -9,10 +9,17 @@
   justify-content: center;
   flex-basis: 100%;
   margin: 0 auto 0rem;
-  padding: .5rem 0;
+  padding-bottom: .5rem;
   background-color: #111111;
 }
-@media only screen and (max-width: 800px) {
+.playback-progress-wrap {
+  width: 100%;
+  margin-bottom: .5rem;
+}
+.playback-progress {
+  height: 1px;
+  background-color: #FFF;
+  transition: width 5s;
 }
 .now-playing-play {
   height: 25px;
@@ -39,36 +46,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 5vmax;
+  max-width: 3vmax;
 }
 @media only screen and (max-width: 800px) {
   .now-playing-img {
     margin: 0 2rem;
     width: 15vw;
-  }
-}
-.now-playing-circle {
-  position: absolute;
-  width: 160%;
-  height: 160%;
-  background-image: url(../../img/now-playing-circle-white-stroke.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  animation-name: nowPlaying;
-  animation-duration: 15s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-fill-mode: forwards;
-  transform: translate(-50%, -50%);
-  z-index: -1;
-}
-@keyframes nowPlaying {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
   }
 }
 .now-playing-info {

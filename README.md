@@ -56,9 +56,9 @@ npm install
 ```sh
 https://developer.apple.com/documentation/applemusicapi/getting_keys_and_creating_tokens
 ```
-4. Import into index.js
+4. Import dev token into index.js as appleToken
 ```sh
-Create export at './util/appleToken'
+Create dev token export at './util/appleToken'
 ```
 
 <!-- ROADMAP -->

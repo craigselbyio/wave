@@ -1,16 +1,68 @@
-# wave App
+<!-- PROJECT LOGO -->
+<p align="center">
+  <a href="http://wave-20200716185423-hostingbucket-dev.s3-website.us-east-2.amazonaws.com" target="_blank">
+    <img src="src/img/wave-overview.gif" alt="wave overview">
+  </a>
 
-Project initialized with npx [Create React App](https://github.com/facebook/create-react-app).
+  <h3 align="center">wave music app</h3>
 
-'npm start' runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  <p align="center">
+    Music app to browse, interact and play songs using the Apple Music API
+    <br />
+    <a href="http://wave-20200716185423-hostingbucket-dev.s3-website.us-east-2.amazonaws.com" target="_blank"><strong>View Live »</strong></a>
+    <br />
+  </p>
+</p>
 
-## Spotify API
 
-### Web API Reference
-[https://developer.spotify.com/documentation/web-api/reference/](https://developer.spotify.com/documentation/web-api/reference/)
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
 
-### Authorization Guide
-[https://developer.spotify.com/documentation/general/guides/authorization-guide/](https://developer.spotify.com/documentation/general/guides/authorization-guide/)
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Installation](#installation)
+* [Roadmap](#roadmap)
 
-Using Implicit grant flow, for clients that are implemented entirely using JavaScript and running in the resource owner’s browser. You do not need any server-side code to use it.
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+In active development this Music app allows Apple Music subscribers to browse, interact and play songs using the Apple Music API
+
+
+### Built With
+
+* Project initialized with npx [Create React App](https://github.com/facebook/create-react-app).
+* [Apple Music API](https://developer.apple.com/documentation/applemusicapi)
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+To get a local copy up and running follow these simple steps.
+
+### Installation
+ 
+1. Clone the repo
+```sh
+git clone https://github.com/craigselbyio/wave
+```
+2. Install NPM packages
+```sh
+npm install
+```
+3. Create Apple Music developer token and keys
+```sh
+https://developer.apple.com/documentation/applemusicapi/getting_keys_and_creating_tokens
+```
+4. Import dev token into index.js as appleToken
+```sh
+Create dev token export at './util/appleToken'
+```
+
+<!-- ROADMAP -->
+## Roadmap
+
+- Create Playlists - Users can create playlists and save it to their Apple Music Account.
+- What's That Song - A music game where users hear a song a try to identify the correct song name & artist.

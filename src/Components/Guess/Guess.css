@@ -1,0 +1,62 @@
+.song-guess-wrap {
+  max-width: 1400px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+.coming-soon {
+    background-image: url(../../img/coming-soon.svg);
+    background-position: center;
+    background-size: 80%;
+    background-repeat: repeat-y;
+    width: 100%;
+    height: 10vw;
+}
+.song-info {
+  display: flex;
+  margin: 4rem 0 0;
+  align-items: center;
+}
+.song-cover {
+  width: 50%;
+  
+}
+.song-cover img {
+  margin-top: 2rem;
+  width: 50%;
+  filter: blur(20px);
+  -webkit-filter: blur(20px);
+}
+@media only screen and (max-width: 800px) {
+  .song-cover {
+    width: 100%;
+  }
+  .song-cover img {
+    width: 70%;
+  }
+  .song-info {
+    flex-direction: column;
+  }
+}
+.song-options {
+  width: 50%;
+  list-style: none;
+  padding: 0;
+  margin: 4rem 0 0;
+}
+.song-options li {
+  width: 100%;
+  padding: 1rem 0;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  margin: 1rem auto;
+}
+@media only screen and (max-width: 800px) {
+  .song-options {
+    width: 100%;
+  }
+}
+.song-options li h4,
+.song-options li p {
+  margin: 0;
+  padding: 0;
+}

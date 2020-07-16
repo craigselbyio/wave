@@ -1,37 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import './Playlist.css';
-import { Spotify } from '../../util/Spotify';
-import noCover from '../../img/no-album-cover.svg';
+import React, { useState, useEffect } from "react";
+import "./Playlist.css";
+import noCover from "../../img/no-album-cover.svg";
 
+const Playlists = ({ music }) => {
+  const [playlists, setPlaylists] = useState();
 
-const Playlists = () => {
+  useEffect(() => {
+    music.api.library.playlists().then(response => {
+      console.log(response)
+      setPlaylists(response)
+    })
 
-    const [playlists , setPlaylists] = useState();
+  }, []);
 
-    useEffect(() => {
-        const getUsersPlaylists = async () => {
-            let playlists = await Spotify.getUsersPlaylists();
-            setPlaylists([...playlists]);
-            console.log(playlists);
-        }
-        getUsersPlaylists();
-    }, [])
-
-    return (
-        <div className="playlists">
-            {playlists ? (
-            playlists.map(playlist => (
-                <a href={playlist.spotifyLink} target="new" key={playlists.id}>
-                <div className="playlist">
-                    <img className="playlist-img" src={playlist.img ? playlist.img : noCover} alt="" />
-                    <h4>{playlist.name}</h4>
-                </div>
-                </a>
-            ))
-            ) : <h1>No Playlists.</h1>}
-        </div>
-    )
-
-}
+  return (
+    <div className="playlists">
+      {playlists ? (
+        playlists.map((playlist, index) => (
+          <div className="playlist" key={index}>
+            <img className="playlist-img" src={noCover} alt="" />
+            <h4>{playlist.attributes.name}</h4>
+          </div>
+        ))
+      ) : (
+        <h1>No Playlists.</h1>
+      )}
+    </div>
+  );
+};
 
 export default Playlists;

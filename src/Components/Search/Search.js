@@ -1,52 +1,44 @@
-import React, { useState } from "react";
+import React from "react";
 import Track from "../Track/Track";
 import "./Search.css";
-import { Spotify } from "../../util/Spotify";
+import NowPlaying from "../NowPlaying/NowPlaying";
 
-const Search = ({ addToPlaylist, newPlaylist, trackSearch, searchResults }) => {
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const isInPlaylist = (trackID) => {
-    let trackIDs = newPlaylist.map((track) => track.id);
-    return trackIDs.includes(trackID) ? true : false;
-  };
-
-  const handleSearchTermChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
+const Search = ({
+  trackSearch,
+  playbackProgress,
+  musicControls,
+  isPlaying,
+  playingState,
+  getSizedImageURL,
+  addToMusicQueue,
+  addToPlaylist,
+  newPlaylist,
+  searchResults,
+  isInPlaylist,
+}) => {
   return (
-    <>
-      <div className="search-input-wrap">
-        <form onSubmit={() => trackSearch(searchTerm)}>
-          <input
-            type="text"
-            className="search-input"
-            placeholder="Search for greatness_"
-            value={searchTerm}
-            onChange={handleSearchTermChange}
-          />
-        </form>
-        <button
-        type="submit"
-          className="track-search-btn"
-          onClick={() => trackSearch(searchTerm)}
-        >
-          SEARCH
-        </button>
-      </div>
+    <div className="search-wrap">
+      <NowPlaying
+        playbackProgress={playbackProgress}
+        musicControls={musicControls}
+        isPlaying={isPlaying}
+        playingState={playingState}
+        getSizedImageURL={getSizedImageURL}
+      />
       <div className="search-results">
         {searchResults.map((track) => (
           <Track
+            addToMusicQueue={addToMusicQueue}
             key={track.id}
             addToPlaylist={addToPlaylist}
             trackType={"large"}
             track={track}
             isInPlaylist={isInPlaylist}
+            getSizedImageURL={getSizedImageURL}
           />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,10 +1,10 @@
 * {
   color: #fff;
 }
-.featured-wrap {
+.featured-wrap, .recently-played {
   display: flex;
   max-width: 1400px;
-  margin: 3rem auto 0 auto;
+  margin: 2rem auto 3rem;
 }
 @media only screen and (max-width: 800px) {
   .featured-wrap {
@@ -13,7 +13,7 @@
   }
 }
 .number-one-track-wrap {
-  width: 50vw;
+  width: 40%;
   margin: 0 2rem 0 1rem;
 }
 @media only screen and (max-width: 800px) {
@@ -25,8 +25,8 @@
 .number-one-track {
   position: sticky;
   top: 0;
-  background-image: url(../../img/most-popular.png), url(../../img/fire-bg.png);
-  background-size: 70%, contain;
+  background-image: url(../../img/hot-tracks.png), url(../../img/fire-bg.png);
+  background-size: 60%, contain;
   background-position: center 3vh, top center;
   background-repeat: no-repeat;
 }
@@ -57,7 +57,7 @@
   width: calc(100% - 20vmin);
 }
 .number-one-track-title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin: 1rem 0 0.25rem 0;
 }
 .number-one-track-artist {
@@ -72,13 +72,15 @@
 }
 .featured-tracks {
   display: flex;
-  width: 50vw;
+  width: 60%;
   text-align: left;
   flex-wrap: wrap;
+  margin-top: 3rem;
 }
 @media only screen and (max-width: 800px) {
   .featured-tracks {
     width: 100%;
+    margin: 1rem 0;
   }
 }
 .featured-tracks .track {
@@ -88,4 +90,7 @@
   .featured-tracks .track {
     width: calc((100% / 3) - 1rem);
   }
+}
+.recently-played {
+  flex-basis: 100%;
 }

@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import logo from "./img/wave-logo-v2.svg";
 import "./App.css";
 import Featured from "./Components/Featured/Featured";
-import { Spotify } from "./util/Spotify";
 import NewPlaylist from "./Components/NewPlaylist/NewPlaylist";
 import Search from "./Components/Search/Search";
 import Playlists from "./Components/Playlists/Playlists";
+import Guess from "./Components/Guess/Guess";
 
 function App() {
   const [newReleases, setNewReleases] = useState([]);
+
+  const [playingState, setPlayingState] = useState(null);
+
+  const [playbackProgress, setPlaybackProgress] = useState(0);
 
   const [newPlaylist, setNewPlaylist] = useState([]);
 
@@ -16,59 +20,73 @@ function App() {
 
   const [homeView, setHomeView] = useState("new");
 
-  const [spotifyStatus, setSpotifyStatus] = useState({
-    status: "",
-    errorMessage: "",
-  });
+  const [isPlaying, setIsPlaying] = useState(null);
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  let music = window.MusicKit.getInstance();
 
   useEffect(() => {
-    const getNewReleases = async () => {
-      if (Spotify.hasAccessTokenInURI()) {
-        try {
-          let response = await Spotify.getNew();
-          returnIfSpotifyTokenExpired(response);
-          setNewReleases(response);
-        } catch (error) {
-          console.log(error);
-        }
-      }
+    music.api.charts(["albums", "songs"], { limit: 11 }).then((response) => {
+      setNewReleases([...response.songs[0].data]);
+      //console.log(response.songs[0].data.map((track) => console.log(track)));
+    });
+
+    music.addEventListener("playbackStateDidChange", (e) => {
+      // Add playback event state code to isPlaying state
+      console.log(music.player.isPlaying);
+      setIsPlaying(music.player.isPlaying);
+    });
+
+    music.addEventListener("playbackProgressDidChange", (e) => {
+      // Update PlaybackProgress state with track progress int
+      console.log(e.progress);
+      setPlaybackProgress(e.progress);
+    });
+
+    return () => {
+      music.addEventListener("playbackProgressDidChange", (e) => {
+        // Update PlaybackProgress state with track progress int
+        console.log(e.progress);
+        setPlaybackProgress(e.progress);
+      });
     };
-    getNewReleases();
-  }, []);
+  }, [music, music.player.isPlaying]);
 
-  const returnIfSpotifyTokenExpired = (response) => {
-    if (response.error && response.error.status === 401) {
-      console.log("error recevied!");
-      setSpotifyStatus({ status: "expired", errorMessage: "Connecting..." });
-      return;
-    } else {
-      setSpotifyStatus({ status: "current", errorMessage: "" });
-    }
-  };
-
-  const getNewReleases = async () => {
+  const trackSearch = async (e, searchTerm) => {
+    e.preventDefault();
+    setHomeView("search");
     try {
-      let response = await Spotify.getNew();
-      returnIfSpotifyTokenExpired(response);
-      setNewReleases(response);
+      let results = await music.api.search(searchTerm, {
+        limit: 24,
+        types: "songs",
+      });
+      console.log(results.songs.data);
+      setSearchResults([...results.songs.data]);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // Replace placeholders in API image url with desired size
+  const getSizedImageURL = (url, size) => {
+    return url.replace(/{[wh]}/g, size);
+  };
+
+  const addToMusicQueue = (track) => {
+    music.setQueue({ song: track.id }).then((queue) => {
+      music.stop();
+      music.play();
+      console.log(queue);
+      setPlayingState(track);
+    });
+
+    //music.api.addToLibrary({songs: [track.id]}).then(r => console.log(r));
   };
 
   const isInPlaylist = (trackID) => {
     let trackIDs = newPlaylist.map((track) => track.id);
     return trackIDs.includes(trackID);
-  };
-
-  const trackSearch = async (searchTerm) => {
-    try {
-      let response = await Spotify.trackSearch(searchTerm);
-      returnIfSpotifyTokenExpired(response);
-      setSearchResults([...response]);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   const handlePlaylistAdd = (track) => {
@@ -94,29 +112,33 @@ function App() {
     setNewPlaylist([...updatedPlaylist]);
   };
 
+  const musicControls = {
+    playMusic() {
+      music.play();
+    },
+
+    pauseMusic() {
+      music.pause();
+    },
+  };
+
+  const handleSearchTermChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-      </header>
 
-      {spotifyStatus.status === "current" && (
-        <>
+        <div className="header-nav">
           <button
             className={`home-view-btn ${
               homeView === "new" && "home-view-btn-active"
             }`}
             onClick={() => setHomeView("new")}
           >
-            Most Popular
-          </button>
-          <button
-            className={`home-view-btn ${
-              homeView === "search" && "home-view-btn-active"
-            }`}
-            onClick={() => setHomeView("search")}
-          >
-            Search Tracks
+            Hot Tracks
           </button>
           <button
             className={`home-view-btn ${
@@ -126,20 +148,49 @@ function App() {
           >
             Playlists
           </button>
-        </>
-      )}
-
-      {spotifyStatus.status !== "current" && (
-        <div className="connect-to-spotify" onClick={getNewReleases}>
-          <h3 className="connect-to-spotify-text">
-            {spotifyStatus.errorMessage
-              ? spotifyStatus.errorMessage
-              : "Connect to Spotify"}
-          </h3>
+          <button
+            className={`home-view-btn ${
+              homeView === "songGame" && "home-view-btn-active"
+            }`}
+            onClick={() => setHomeView("songGame")}
+          >
+            What's That Song
+          </button>
+          <div className="search-input-wrap">
+            <form onSubmit={(e) => trackSearch(e, searchTerm)}>
+              <input
+                type="text"
+                className="search-input"
+                value={searchTerm}
+                onChange={handleSearchTermChange}
+              />
+            </form>
+            <button
+              type="submit"
+              className="track-search-btn"
+              onClick={(e) => trackSearch(e, searchTerm)}
+            ></button>
+          </div>
         </div>
+      </header>
+
+      {homeView === "playlists" && (
+        <Playlists
+          music={music}
+          userToken={music.storekit.userToken}
+          getSizedImageURL={getSizedImageURL}
+          newPlaylist={newPlaylist}
+          setNewPlaylist={setNewPlaylist}
+          removePlaylistItem={handlePlaylistRemove}
+          setHomeView={setHomeView}
+        />
       )}
 
-      {newPlaylist.length > 0 ? (
+      {homeView === "songGame" && (
+        <Guess />
+      )}
+
+      {newPlaylist.length && newPlaylist.length > 0 ? (
         <NewPlaylist
           newPlaylist={newPlaylist}
           setNewPlaylist={setNewPlaylist}
@@ -150,23 +201,35 @@ function App() {
 
       {homeView === "search" && (
         <Search
-          addToPlaylist={handlePlaylistAdd}
-          newPlaylist={newPlaylist}
+          playbackProgress={playbackProgress}
           trackSearch={trackSearch}
           searchResults={searchResults}
+          musicControls={musicControls}
+          isPlaying={isPlaying}
+          playingState={playingState}
+          getSizedImageURL={getSizedImageURL}
+          addToMusicQueue={addToMusicQueue}
+          addToPlaylist={handlePlaylistAdd}
+          newPlaylist={newPlaylist}
+          isInPlaylist={isInPlaylist}
+          music={music}
         />
       )}
 
       {homeView === "new" && newReleases.length > 0 && (
         <Featured
+          playbackProgress={playbackProgress}
+          musicControls={musicControls}
+          isPlaying={isPlaying}
+          playingState={playingState}
+          getSizedImageURL={getSizedImageURL}
+          addToMusicQueue={addToMusicQueue}
           addToPlaylist={handlePlaylistAdd}
           newReleases={newReleases}
           newPlaylist={newPlaylist}
           isInPlaylist={isInPlaylist}
         />
       )}
-
-      {homeView === "playlists" && <Playlists />}
     </div>
   );
 }

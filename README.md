@@ -1,6 +1,6 @@
 <!-- PROJECT LOGO -->
 <p align="center">
-  <a href="https://github.com/craigselbyio/wave">
+  <a href="http://wave-20200716185423-hostingbucket-dev.s3-website.us-east-2.amazonaws.com" target="_blank">
     <img src="src/img/wave-overview.gif" alt="wave overview">
   </a>
 
@@ -9,7 +9,7 @@
   <p align="center">
     Music app to browse, interact and play songs using the Apple Music API
     <br />
-    <a href="https://github.com/github_username/repo"><strong>Explore the docs »</strong></a>
+    <a href="http://wave-20200716185423-hostingbucket-dev.s3-website.us-east-2.amazonaws.com" target="_blank"><strong>View Live »</strong></a>
     <br />
   </p>
 </p>

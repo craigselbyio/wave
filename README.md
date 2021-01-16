@@ -1,6 +1,6 @@
 <!-- PROJECT LOGO -->
 <p align="center">
-  <a href="http://wave-20200716185423-hostingbucket-dev.s3-website.us-east-2.amazonaws.com" target="_blank">
+  <a href="https://dwzso8y3gwriz.cloudfront.net" target="_blank">
     <img src="src/img/wave-overview.gif" alt="wave overview">
   </a>
 
@@ -9,59 +9,66 @@
   <p align="center">
     Music app to browse, interact and play songs using the Apple Music API
     <br />
-    <a href="http://wave-20200716185423-hostingbucket-dev.s3-website.us-east-2.amazonaws.com" target="_blank"><strong>View Live »</strong></a>
+    <a href="https://dwzso8y3gwriz.cloudfront.net" target="_blank"><strong>View Live »</strong></a>
     <br />
   </p>
 </p>
 
-
 <!-- TABLE OF CONTENTS -->
+
 ## Table of Contents
 
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Installation](#installation)
-* [Roadmap](#roadmap)
-
+- [About the Project](#about-the-project)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Installation](#installation)
+- [Roadmap](#roadmap)
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 In active development this Music app allows Apple Music subscribers to browse, interact and play songs using the Apple Music API
 
-
 ### Built With
 
-* Project initialized with npx [Create React App](https://github.com/facebook/create-react-app).
-* [Apple Music API](https://developer.apple.com/documentation/applemusicapi)
-
+- Project initialized with npx [Create React App](https://github.com/facebook/create-react-app).
+- [Apple Music API](https://developer.apple.com/documentation/applemusicapi)
 
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 To get a local copy up and running follow these simple steps.
 
 ### Installation
- 
+
 1. Clone the repo
+
 ```sh
 git clone https://github.com/craigselbyio/wave
 ```
+
 2. Install NPM packages
+
 ```sh
 npm install
 ```
+
 3. Create Apple Music developer token and keys
+
 ```sh
 https://developer.apple.com/documentation/applemusicapi/getting_keys_and_creating_tokens
 ```
+
 4. Import dev token into index.js as appleToken
+
 ```sh
 Create dev token export at './util/appleToken'
 ```
 
 <!-- ROADMAP -->
+
 ## Roadmap
 
 - Create Playlists - Users can create playlists and save it to their Apple Music Account.

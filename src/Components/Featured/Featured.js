@@ -2,6 +2,7 @@ import React from "react";
 import "./Featured.css";
 import Track from "../Track/Track";
 import NowPlaying from "../NowPlaying/NowPlaying";
+import topSongs from "../../img/top-songs.mp4";
 
 const Featured = ({
   musicControls,
@@ -23,6 +24,14 @@ const Featured = ({
     <div className="home-dashbaord">
       <div className="featured-wrap">
         <div className="number-one-track-wrap">
+          <video
+            className="top-track-title-video"
+            src={topSongs}
+            autoPlay
+            loop
+            playsInline
+          ></video>
+
           {newReleases.map(
             (track, index) =>
               index === 0 && (

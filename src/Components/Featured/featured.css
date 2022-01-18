@@ -15,7 +15,6 @@
   }
 }
 .number-one-track-wrap {
-  /* width: 40%; */
   margin: 0 2rem 0 1rem;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -25,12 +24,20 @@
   .number-one-track-wrap {
     width: 100%;
     margin: 0 0 2rem 0;
+    grid-template-rows: repeat(1fr);
   }
 }
 .number-one-track {
   grid-column: 8 / -1;
   grid-row: 1;
   z-index: 1;
+}
+@media only screen and (max-width: 800px) {
+  .number-one-track {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin: -20vw 1rem 0;
+  }
 }
 .top-track-title-video {
   padding: 0;
@@ -41,6 +48,11 @@
   position: relative;
   left: -6vw;
   width: 100%;
+}
+@media only screen and (max-width: 800px) {
+  .top-track-title-video {
+    grid-column: 1 / span 12;
+  }
 }
 h1.top-track-title {
   display: block;

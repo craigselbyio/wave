@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import logo from "./img/wave-logo-v2.svg";
 import "./App.css";
 import Featured from "./Components/Featured/Featured";
@@ -138,7 +139,7 @@ function App() {
             }`}
             onClick={() => setHomeView("new")}
           >
-            Hot Tracks
+            Top Songs
           </button>
           <button
             className={`home-view-btn ${
@@ -186,9 +187,7 @@ function App() {
         />
       )}
 
-      {homeView === "songGame" && (
-        <Guess />
-      )}
+      {homeView === "songGame" && <Guess />}
 
       {newPlaylist.length && newPlaylist.length > 0 ? (
         <NewPlaylist

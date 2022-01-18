@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+
 import "./Featured.css";
 import Track from "../Track/Track";
 import NowPlaying from "../NowPlaying/NowPlaying";
@@ -16,6 +18,32 @@ const Featured = ({
   isInPlaylist,
   recentlyPlayed,
 }) => {
+  const trackRef = React.createRef();
+
+  const topTitle = React.createRef();
+
+  const indvTracks = React.createRef();
+
+  useEffect(() => {
+    const tl = gsap.timeline();
+
+    tl.from(topTitle.current, {
+      duration: 0.5,
+      opacity: 0,
+      y: 50,
+    })
+      .from(trackRef.current, {
+        duration: 0.5,
+        opacity: 0,
+        y: 50,
+      })
+      .from(indvTracks.current, {
+        duration: 0.5,
+        opacity: 0,
+        y: 50,
+      });
+  }, [trackRef, topTitle, indvTracks]);
+
   const getSizedImageURL = (url, size) => {
     return url.replace(/{[wh]}/g, size);
   };
@@ -25,17 +53,19 @@ const Featured = ({
       <div className="featured-wrap">
         <div className="number-one-track-wrap">
           <video
+            ref={topTitle}
             className="top-track-title-video"
             src={topSongs}
             autoPlay
             loop
             playsInline
+            muted
           ></video>
 
           {newReleases.map(
             (track, index) =>
               index === 0 && (
-                <div className="number-one-track" key={track.id}>
+                <div className="number-one-track" key={track.id} ref={trackRef}>
                   <img
                     onClick={() => addToMusicQueue(track)}
                     className={
@@ -60,7 +90,7 @@ const Featured = ({
               )
           )}
         </div>
-        <div className="featured-tracks">
+        <div className="featured-tracks" ref={indvTracks}>
           {playingState != null && (
             <NowPlaying
               playbackProgress={playbackProgress}

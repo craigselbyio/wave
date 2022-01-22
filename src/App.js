@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 import logo from "./img/wave-logo-v2.svg";
 import "./App.css";
@@ -26,6 +27,42 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
 
   let music = window.MusicKit.getInstance();
+
+  const trackRef = React.createRef();
+
+  const navRef = React.createRef();
+
+  const topTitle = React.createRef();
+
+  const indvTracks = React.createRef();
+
+  useEffect(() => {
+    const tl = gsap.timeline({ delay: 0.5 });
+
+    tl.from(topTitle.current, {
+      duration: 0.5,
+      opacity: 0,
+      y: 50,
+    })
+      .from(trackRef.current, {
+        duration: 0.5,
+        opacity: 0,
+        y: 50,
+      })
+      .from(indvTracks.current, {
+        duration: 0.5,
+        opacity: 0,
+        y: 50,
+      });
+  }, [topTitle, trackRef, indvTracks]);
+
+  useEffect(() => {
+    gsap.from(navRef.current, {
+      duration: 1,
+      opacity: 0,
+      y: 100,
+    });
+  }, []);
 
   useEffect(() => {
     music.api.charts(["albums", "songs"], { limit: 11 }).then((response) => {
@@ -129,7 +166,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="App-header" ref={navRef}>
         <img src={logo} className="App-logo" alt="logo" />
 
         <div className="header-nav">
@@ -227,6 +264,9 @@ function App() {
           newReleases={newReleases}
           newPlaylist={newPlaylist}
           isInPlaylist={isInPlaylist}
+          trackRef={trackRef}
+          topTitle={topTitle}
+          indvTracks={indvTracks}
         />
       )}
     </div>

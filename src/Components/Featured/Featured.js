@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
+import React from "react";
+//import { gsap } from "gsap";
 
 import "./Featured.css";
 import Track from "../Track/Track";
@@ -17,33 +17,10 @@ const Featured = ({
   addToPlaylist,
   isInPlaylist,
   recentlyPlayed,
+  trackRef,
+  topTitle,
+  indvTracks,
 }) => {
-  const trackRef = React.createRef();
-
-  const topTitle = React.createRef();
-
-  const indvTracks = React.createRef();
-
-  useEffect(() => {
-    const tl = gsap.timeline();
-
-    tl.from(topTitle.current, {
-      duration: 0.5,
-      opacity: 0,
-      y: 50,
-    })
-      .from(trackRef.current, {
-        duration: 0.5,
-        opacity: 0,
-        y: 50,
-      })
-      .from(indvTracks.current, {
-        duration: 0.5,
-        opacity: 0,
-        y: 50,
-      });
-  }, [trackRef, topTitle, indvTracks]);
-
   const getSizedImageURL = (url, size) => {
     return url.replace(/{[wh]}/g, size);
   };
